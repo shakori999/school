@@ -1,1 +1,2 @@
-# school
+this is a new project
+tests
