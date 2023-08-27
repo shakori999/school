@@ -5,6 +5,10 @@ import datetime
 def test_course_creation(course):
     assert str(course) == f"Introduction to Computer Science"
 
+@pytest.mark.django_db
+def test_course_per_cycle_creation(course_per_cycle):
+    assert str(course_per_cycle) == f"{course_per_cycle.course.name} ({course_per_cycle.cycle.cyclestartdate} - {course_per_cycle.cycle.cycleenddate})"
+
 
 '''
 @pytest.mark.django_db

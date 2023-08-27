@@ -6,7 +6,6 @@ from ..course.models import Course
 # Create your models here.
 class Teacher(models.Model):
     user = models.OneToOneField(Person, on_delete=models.CASCADE)
-    courses = models.ManyToManyField(Course, through='TeachersPerCourse')
     teachername = models.CharField(max_length=100)
     email = models.EmailField()
     phoneno = models.CharField(max_length=20)
@@ -27,13 +26,14 @@ class Teacher(models.Model):
         verbose_name_plural = "Teachers"
 
 class TeachersPerCourse(models.Model):
-    course = models.ForeignKey("course.Course", on_delete=models.CASCADE)
+    #course = models.ForeignKey("course.Course", on_delete=models.CASCADE)
     cycle = models.ForeignKey("cycle.Cycle", on_delete=models.CASCADE)
-    teacher = models.ForeignKey("teacher.Teacher", on_delete=models.CASCADE)
-    coursespercycle = models.ForeignKey("course.CoursesPerCycle", on_delete=models.CASCADE)
+    teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE)
+    coursespercycle = models.ForeignKey("course.CoursesPerCycle", on_delete=models.CASCADE, null=True)
 
     class Meta:
         verbose_name_plural = "Teachers per Course"
+        unique_together = ('coursespercycle', 'cycle', 'teacher')
 
     def __str__(self):
-        return f"{self.teacher.full_name()} - {self.course.name} ({self.cycle.cycledescription})"
+        return f"{self.teacher.full_name()} - {self.coursespercycle.course.name} ({self.cycle.cycledescription})"

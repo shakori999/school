@@ -8,7 +8,7 @@ class TeacherAdmin(admin.ModelAdmin):
     # Other configuration options like list_filter, search_fields, etc.
 
 class TeachersPerCourseAdmin(admin.ModelAdmin):
-    list_display = ('course', 'cycle', 'teacher', 'coursespercycle',)
+    list_display = ('cycle', 'teacher', 'coursespercycle',)
     # Other configuration options like list_filter, search_fields, etc.
 
 # Register the Student model with its admin class

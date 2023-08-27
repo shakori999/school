@@ -5,7 +5,7 @@ import pytest
 from django.contrib.auth.models import User
 from ..dashboard.models import Person, Role
 from ..student.models import Enrollment, Student
-from ..teacher.models import Teacher
+from ..teacher.models import Teacher, TeachersPerCourse
 from ..course.models import Course, CoursesPerCycle
 from ..cycle.models import Cycle
 from ..categories.models import Category
@@ -128,9 +128,23 @@ def enrollment(student, course_per_cycle):
 def teacher(person_teacher):
     teacher = Teacher.objects.create(
             user=person_teacher,
-            subject_taught="math",
-            date_of_birth="1998-01-01",
-            contact_number="1234567",
-            address="ali street",
+            teachername="John Doe",
+            email="john@example.com",
+            phoneno="1234567890",
+            subject_taught="Computer Science",
+            date_of_birth=date(1990, 1, 1),
+            address="123 Main St",
             )
+
     return teacher
+
+
+@pytest.fixture
+def teachers_per_course(teacher, course_per_cycle, cycle):
+    return TeachersPerCourse.objects.create(
+        cycle=cycle,
+        teacher=teacher,
+        coursespercycle=course_per_cycle,
+    )
+
+

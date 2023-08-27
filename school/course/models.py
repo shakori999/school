@@ -10,7 +10,6 @@ class Course(BaseModel):
     name = models.CharField(max_length=100)
     category = models.ForeignKey("categories.Category", on_delete=models.CASCADE, null=True)
     cycles = models.ManyToManyField('cycle.Cycle', through='CoursesPerCycle')
-    teachers = models.ManyToManyField('teacher.Teacher', through='teacher.TeachersPerCourse')
     description = models.TextField()
     abstract = models.TextField(default="abstract")
     bibliography = models.TextField(default="book")
