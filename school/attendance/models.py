@@ -8,3 +8,17 @@ class Attendance(models.Model):
     class_info = models.ForeignKey("classes.Class", on_delete=models.CASCADE)
     timearrive = models.DateTimeField()
     timeleave = models.DateTimeField()
+
+    class Meta:
+        verbose_name_plural = "Attendance"
+
+    def __str__(self):
+        return f"{self.student.full_name()} - {self.class_info.classtitle} ({self.class_info.classdate})"
+
+    def validate_time(self):
+        if self.timearrive > self.timeleave:
+            raise models.ValidationError("Arrival time must be before leave time")
+
+    def save(self, *args, **kwargs):
+        self.validate_time()
+        super().save(*args, **kwargs)

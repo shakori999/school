@@ -17,12 +17,12 @@ class Student(models.Model):
         indexes = [
             models.Index(fields=['phoneno']),
         ]
+        verbose_name_plural = "Students"
 
     def full_name(self):
-        if self.user.user.first_name and self.user.user.last_name != "":
+        if self.user.user.first_name and self.user.user.last_name:
             return f"{self.user.user.first_name} {self.user.user.last_name}"
-        else:
-            return self.user.user.username
+        return self.user.user.username
 
     def __str__(self):
         return self.full_name()
@@ -33,3 +33,9 @@ class Enrollment(models.Model):
     enrollmentdate = models.DateField()
     cancelled = models.BooleanField(default=False)
     cancellationreason = models.TextField()
+
+    class Meta:
+        verbose_name_plural = "Enrollments"
+
+    def __str__(self):
+        return f"{self.student.full_name()} - {self.course_per_cycle.course.name}"

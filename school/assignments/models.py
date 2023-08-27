@@ -21,14 +21,16 @@ class Assignment(BaseModel):
         pass
 
     def do_action(self):
-        raise NotImplementedError()
+        raise NotImplementedError("Subclasses must implement the do_action method.")
 
     def after_action(self):
         pass
 
+    class Meta:
+        verbose_name_plural = "Assignments"
+
     def __str__(self):
         return self.title
-
 
 class Submission(BaseModel):
     assignment = models.ForeignKey(Assignment, on_delete=models.CASCADE)
@@ -38,4 +40,12 @@ class Submission(BaseModel):
 
     def do_action(self):
         # Specific submission action
+        # For example, you can implement logic to process the submission
+        # This method should be customized based on your project's requirements
         pass
+
+    class Meta:
+        verbose_name_plural = "Submissions"
+
+    def __str__(self):
+        return f"{self.student.full_name()} - {self.assignment.title}"

@@ -15,11 +15,26 @@ class Course(BaseModel):
     abstract = models.TextField(default="abstract")
     bibliography = models.TextField(default="book")
 
+    def __str__(self):
+        return self.name
+
+    def get_full_description(self):
+        return f"{self.name}: {self.description}\nBibliography: {self.bibliography}"
+
 class CoursesPerCycle(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
     cycle = models.ForeignKey("cycle.Cycle", on_delete=models.CASCADE)
     coursestartdate = models.DateField()
     courseenddate = models.DateField()
+
+    class Meta:
+        constraints = [
+            models.CheckConstraint(check=models.Q(coursestartdate__lte=models.F('courseenddate')),
+                                   name='start_before_end')
+        ]
+
+    def __str__(self):
+        return f"{self.course.name} ({self.cycle.cyclestartdate} - {self.cycle.cycleenddate})"
 
     #students = models.ManyToManyField("student.Student", related_name='courses_enrolled', blank=True)
     #enrollment_strategy = models.CharField(max_length=50)

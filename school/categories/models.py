@@ -5,3 +5,15 @@ from django.db import models
 class Category(models.Model):
     name = models.CharField(max_length=100)
     categorydescription = models.TextField()
+
+    class Meta:
+        verbose_name_plural = "Categories"
+
+    def __str__(self):
+        return self.name
+
+    def get_description_summary(self):
+        max_length = 50
+        if len(self.categorydescription) > max_length:
+            return f"{self.categorydescription[:max_length]}..."
+        return self.categorydescription

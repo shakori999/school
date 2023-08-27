@@ -1,8 +1,7 @@
-from django.contrib.auth.models import User
 from django.db import models
 
 from ..dashboard.models import Person
-from ..course.models import Course, CoursesPerCycle
+from ..course.models import Course
 
 # Create your models here.
 class Teacher(models.Model):
@@ -24,8 +23,17 @@ class Teacher(models.Model):
     def __str__(self):
         return self.full_name()
 
+    class Meta:
+        verbose_name_plural = "Teachers"
+
 class TeachersPerCourse(models.Model):
     course = models.ForeignKey("course.Course", on_delete=models.CASCADE)
     cycle = models.ForeignKey("cycle.Cycle", on_delete=models.CASCADE)
     teacher = models.ForeignKey("teacher.Teacher", on_delete=models.CASCADE)
     coursespercycle = models.ForeignKey("course.CoursesPerCycle", on_delete=models.CASCADE)
+
+    class Meta:
+        verbose_name_plural = "Teachers per Course"
+
+    def __str__(self):
+        return f"{self.teacher.full_name()} - {self.course.name} ({self.cycle.cycledescription})"

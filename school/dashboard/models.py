@@ -1,10 +1,6 @@
 from django.db import models
-from django.dispatch import receiver
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
-
-# Create your models here.
-
 
 # Create your models here.
 class Role(models.Model):
@@ -21,14 +17,11 @@ class BaseModel(models.Model):
     class Meta:
         abstract = True
 
-
-
 def notify_students(sender, instance, **kwargs):
     # Notify students about the new assignment
     pass
 
 post_save.connect(notify_students, sender="assignments.Assignment")
-
 
 class Person(BaseModel):
     user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
@@ -40,14 +33,3 @@ class Person(BaseModel):
     def __str__(self):
         return f"{self.user.username} - {self.role}"
 
-#class EnrollmentStrategy:
- #   def enroll(self, course, student):
-        pass
-
-#class DefaultEnrollmentStrategy(EnrollmentStrategy):
-    #def enroll(self, course, student):
-        Enrollment.objects.create(course=course, student=student)
-
-#class PremiumEnrollmentStrategy(EnrollmentStrategy):
-    #def enroll(self, course, student):
-     #   Enrollment.objects.create(course=course, student=student, premium=True)
