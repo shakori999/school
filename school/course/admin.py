@@ -1,14 +1,19 @@
 from django.contrib import admin
-from .models import Course
+from .models import Course, CoursesPerCycle
 
 # Register your models here.
 class CourseAdmin(admin.ModelAdmin):
     list_display = (
-            'name',
-            'start_date',
-            'end_date',
-            'teacher',
-            'enrollment_strategy'
+            'code',
+            'category',
+            )
+
+class CoursesPerCycleAdmin(admin.ModelAdmin):
+    list_display = (
+            'course',
+            'cycle',
+            'coursestartdate',
             )
 
 admin.site.register(Course, CourseAdmin)
+admin.site.register(CoursesPerCycle, CoursesPerCycleAdmin)

@@ -1,6 +1,5 @@
-from .models import Enrollment
+from ..student.models import Enrollment
 
-# school_app/enrollment_strategies.py
 class EnrollmentStrategy:
     def enroll(self, course, student):
         pass

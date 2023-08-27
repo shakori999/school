@@ -46,7 +46,12 @@ def person_teacher(user_teacher, create_teacher_role):
 
 @pytest.fixture
 def student(person_student):
-    student = Student.objects.create(user=person_student, date_of_birth='2000-01-01', contact_number="123456", address="street" )
+    student = Student.objects.create(
+            user=person_student,
+            date_of_birth='2000-01-01',
+            contact_number="123456",
+            address="street",
+            )
     return student
 
 
@@ -55,15 +60,22 @@ def teacher(person_teacher):
     teacher = Teacher.objects.create(user=person_teacher,subject_taught="math", date_of_birth="1998-01-01", contact_number="1234567", address="ali street")
     return teacher
 
-
-
-
 @pytest.fixture
 def course(teacher):
-    course = Course.objects.create(name='Mathematics 101', start_date=date.today(), end_date=date.today() + timedelta(days=30), teacher=teacher)
+    course = Course.objects.create(
+            name='Mathematics 101',
+            start_date=date.today(),
+            end_date=date.today() + timedelta(days=30),
+            teacher=teacher,
+            enrollment_strategy='default',
+            )
     return course
 
 @pytest.fixture
 def enrollment(course,student):
-    enrollment = Enrollment.objects.create(student=student, course=course, enrollment_date="2000-01-01")
+    enrollment = Enrollment.objects.create(
+            student=student,
+            course=course,
+            enrollment_date="2000-01-01",
+            )
     return enrollment

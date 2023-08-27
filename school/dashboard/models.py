@@ -21,14 +21,6 @@ class BaseModel(models.Model):
     class Meta:
         abstract = True
 
-class Enrollment(BaseModel):
-    student = models.ForeignKey("student.Student", on_delete=models.CASCADE,null=True )
-    course = models.ForeignKey("course.Course", on_delete=models.CASCADE, null=True)
-    enrollment_date = models.DateField()
-    premium = models.BooleanField(default=False)
-
-    def __str__(self):
-        return f"{self.student.user.username} - {self.course.name}"
 
 
 def notify_students(sender, instance, **kwargs):
@@ -48,14 +40,14 @@ class Person(BaseModel):
     def __str__(self):
         return f"{self.user.username} - {self.role}"
 
-class EnrollmentStrategy:
-    def enroll(self, course, student):
+#class EnrollmentStrategy:
+ #   def enroll(self, course, student):
         pass
 
-class DefaultEnrollmentStrategy(EnrollmentStrategy):
-    def enroll(self, course, student):
+#class DefaultEnrollmentStrategy(EnrollmentStrategy):
+    #def enroll(self, course, student):
         Enrollment.objects.create(course=course, student=student)
 
-class PremiumEnrollmentStrategy(EnrollmentStrategy):
-    def enroll(self, course, student):
-        Enrollment.objects.create(course=course, student=student, premium=True)
+#class PremiumEnrollmentStrategy(EnrollmentStrategy):
+    #def enroll(self, course, student):
+     #   Enrollment.objects.create(course=course, student=student, premium=True)
