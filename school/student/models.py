@@ -30,7 +30,7 @@ class Student(models.Model):
 class Enrollment(models.Model):
     course_per_cycle = models.ForeignKey("course.CoursesPerCycle", on_delete=models.CASCADE)
     student = models.ForeignKey(Student, on_delete=models.CASCADE)
-    enrollmentdate = models.DateField()
+    enrollmentdate = models.DateField(null=True)
     cancelled = models.BooleanField(default=False)
     cancellationreason = models.TextField()
 
