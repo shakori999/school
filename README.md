@@ -19,7 +19,8 @@ Use this checklist to keep track of the components you've created and tested:
 
 ### Models
 
-- [x] Create models for `Person`, `Cycle`, `Course`, `CoursesPerCycle`, `Class`, `Student`, `Enrollment`, `Teacher`, `TeachersPerCourse`.
+- [x] Create models for `Assignment`,`Sumbission`,`Attendance`,`Category`,`Role`,`BaseModel`, `Person`, ,`Test`,`TestsScores`,`Person`, `Cycle`, `Course`, `CoursesPerCycle`, `Class`, `Student`, `Enrollment`, `Teacher`, `TeachersPerCourse`.
+
 - [x] Define necessary fields and relationships for each model.
 - [x] Run migrations to create database tables.
 - [ ] create more models.
@@ -28,10 +29,17 @@ Use this checklist to keep track of the components you've created and tested:
 ### Tests
 
 - [x] Write unit tests for models using pytest and Django's TestCase.
-- [x] Test model creation, validation, and relationships.
-- [x] Test model methods and properties.
-- [ ] test2.
-- [ ] test3.
+- [ ] Test model creation. completed only for: `person`
+- [ ] Test model String Representation. completed only for: `person`
+- [ ] Test model relationships. completed only for: `person`
+- [ ] Test model validation. completed only for: `person` 
+- [ ] Test model methods and properties. completed only for: `person`
+- [ ] Test model signal.
+- [ ] Test model Index. completed only for: `person`
+- [ ] Test model Meta Options.
+- [ ] Test model Model Manager.
+- [ ] Test model Data Integrity.
+- [ ] Test model Integration.
 
 ### Fixtures
 
