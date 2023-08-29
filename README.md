@@ -19,7 +19,35 @@ Use this checklist to keep track of the components you've created and tested:
 
 ### Models
 
-- [x] Create models for `Assignment`,`Sumbission`,`Attendance`,`Category`,`Role`,`BaseModel`, `Person`, ,`Test`,`TestsScores`,`Person`, `Cycle`, `Course`, `CoursesPerCycle`, `Class`, `Student`, `Enrollment`, `Teacher`, `TeachersPerCourse`.
+- [x] Create models for `
+assignments:
+    - Assignment
+    - Sumbission
+attendance:
+    - Attendance
+categories:
+    - Category
+classes:
+    - Class
+course:
+    - Course
+    - CoursesPerCycle
+cycle:
+    - Cycle
+dashborad:
+    - Role
+    - BaseModel
+    - Person
+exames:
+    - Test
+    - TestsScores
+student
+    - Student
+    - Enrollment
+teacher
+    - Teacher
+    - TeachersPerCourse
+`.
 
 - [x] Define necessary fields and relationships for each model.
 - [x] Run migrations to create database tables.
@@ -29,11 +57,11 @@ Use this checklist to keep track of the components you've created and tested:
 ### Tests
 
 - [x] Write unit tests for models using pytest and Django's TestCase.
-- [ ] Test model creation. completed only for: `person`
-- [ ] Test model String Representation. completed only for: `person`
-- [ ] Test model relationships. completed only for: `person`
-- [ ] Test model validation. completed only for: `person` 
-- [ ] Test model methods and properties. completed only for: `person`
+- [ ] Test model creation. completed only for: `person, Teacher`
+- [ ] Test model String Representation. completed only for:`person, Teacher` 
+- [ ] Test model relationships. completed only for:`person, Teacher` 
+- [ ] Test model validation. completed only for: `person, Teacher` 
+- [ ] Test model methods and properties. completed only for:`person, Teacher` 
 - [ ] Test model signal.
 - [ ] Test model Index. completed only for: `person`
 - [ ] Test model Meta Options.

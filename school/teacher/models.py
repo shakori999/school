@@ -1,7 +1,11 @@
 from django.db import models
+from django.core.exceptions import ValidationError
 
 from ..dashboard.models import Person
-from ..course.models import Course
+
+def validate_phone_number(value):
+    if not value.isdigit() or len(value) < 10 or len(value) > 15:
+        raise ValidationError("Invalid phone number format")
 
 # Create your models here.
 class Teacher(models.Model):
@@ -9,15 +13,17 @@ class Teacher(models.Model):
     teachername = models.CharField(max_length=100)
     email = models.EmailField()
     phoneno = models.CharField(max_length=20)
+    phoneno = models.CharField(max_length=20, validators=[validate_phone_number])
     subject_taught = models.CharField(max_length=50)
     date_of_birth = models.DateField()
     address = models.TextField()
+
 
     def full_name(self):
         if self.user.user.first_name and self.user.user.last_name != "":
             return f"{self.user.user.first_name} {self.user.user.last_name}"
         else:
-            return self.user.user.username
+            return self.teachername
 
     def __str__(self):
         return self.full_name()
@@ -26,7 +32,6 @@ class Teacher(models.Model):
         verbose_name_plural = "Teachers"
 
 class TeachersPerCourse(models.Model):
-    #course = models.ForeignKey("course.Course", on_delete=models.CASCADE)
     cycle = models.ForeignKey("cycle.Cycle", on_delete=models.CASCADE)
     teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE)
     coursespercycle = models.ForeignKey("course.CoursesPerCycle", on_delete=models.CASCADE, null=True)
