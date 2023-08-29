@@ -22,41 +22,41 @@ Use this checklist to keep track of the components you've created and tested:
 - [x] Create models for
 
 #### Assignments
-- [x] `Assignment`.
-- `Submission`
+- [x] `Assignment`
+- [x] `Submission`
 
 #### Attendance
-- `Attendance`
+- [x] `Attendance`
 
 #### Categories
-- `Category`
+- [x] `Category`
 
 #### Classes
-- `Class`
+- [x] `Class`
 
 #### Course
-- `Course`
-- `CoursesPerCycle`
+- [x] `Course`
+- [x] `CoursesPerCycle`
 
 #### Cycle
-- `Cycle`
+- [x] `Cycle`
 
 #### Dashboard
-- `Role`
-- `BaseModel`
-- `Person`
+- [x] `Role`
+- [x] `BaseModel`
+- [x] `Person`
 
 #### Exams
-- `Test`
-- `TestScores`
+- [x] `Test`
+- [x] `TestScores`
 
 #### Student
-- `Student`
-- `Enrollment`
+- [x] `Student`
+- [x] `Enrollment`
 
 #### Teacher
-- `Teacher`
-- `TeachersPerCourse`
+- [x] `Teacher`
+- [x] `TeachersPerCourse`
 
 - [x] Define necessary fields and relationships for each model.
 - [x] Run migrations to create database tables.
