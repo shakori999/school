@@ -22,7 +22,7 @@ Use this checklist to keep track of the components you've created and tested:
 - [x] Create models for
 
 #### Assignments
-- `Assignment`
+- [x] `Assignment`.
 - `Submission`
 
 #### Attendance
