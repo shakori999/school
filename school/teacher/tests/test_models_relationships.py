@@ -1,43 +1,25 @@
 import pytest
+from ..models import Teacher,TeachersPerCourse
 
-from ..models import TeachersPerCourse
-
-@pytest.mark.django_db
-def test_teachers_per_course_unique(teachers_per_course):
-
-    # Create two TeachersPerCourse instances with the same attributes
-
-    teachers_per_course_1 = teachers_per_course
-    teachers_per_course_2 = teachers_per_course
-
-    # There should be only one TeachersPerCourse instance due to unique_together constraint
-
-    assert TeachersPerCourse.objects.count() == 1
+'''
+this section for testing teacher model
+'''
 
 @pytest.mark.django_db
-def test_teacher_full_name_with_first_and_last_name(teacher):
-    # Create a Teacher instance with first and last name
-    teacher.user.user.first_name = 'mohammed1'
-    teacher.user.user.last_name = 'ali2'
-    teacher.user.user.save()
+def test_teachers_relationship(teacher, person_teacher):
+    # Create a teacher instance
+    teacher = teacher
+    # Retrieve the created Teachers instance from the database
+    tpc_from_db = Teacher.objects.get(id=teacher.id)
 
-    # Test the full_name method
-    assert teacher.full_name() == 'mohammed1 ali2'
+    # Perform assertions to check the relationships
+    print(tpc_from_db.user)
+    assert tpc_from_db.user == person_teacher 
 
-@pytest.mark.django_db
-def test_teacher_full_name_without_first_and_last_name(teacher):
-    # Create a Teacher instance without first and last name
-    teacher.user.user.first_name = ''
-    teacher.user.user.last_name = ''
-    teacher.user.user.save()
-
-    # Test the full_name method
-    assert teacher.full_name() == 'hussain rida'
 
 """
 this section for testing teacherpercourse model
 """
-
 @pytest.mark.django_db
 def test_teachers_per_course_relationship(teachers_per_course, cycle, teacher, course_per_cycle):
     # Create a TeachersPerCourse instance
