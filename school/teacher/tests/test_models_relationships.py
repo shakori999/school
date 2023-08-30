@@ -13,7 +13,6 @@ def test_teachers_relationship(teacher, person_teacher):
     tpc_from_db = Teacher.objects.get(id=teacher.id)
 
     # Perform assertions to check the relationships
-    print(tpc_from_db.user)
     assert tpc_from_db.user == person_teacher 
 
 

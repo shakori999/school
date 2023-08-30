@@ -66,9 +66,9 @@ Use this checklist to keep track of the components you've created and tested:
 ### Tests
 
 - [x] Write unit tests for models using pytest and Django's TestCase.
-- [ ] Test model creation. completed only for: `person, Teacher`
-- [ ] Test model String Representation. completed only for:`person, Teacher` 
-- [ ] Test model relationships. completed only for:`person, Teacher` 
+- [ ] Test model creation. completed only for: `person, Teacher, student, attendance`
+- [ ] Test model String Representation. completed only for:`person, Teacher, student` 
+- [ ] Test model relationships. completed only for:`person, Teacher, student` 
 - [ ] Test model validation. completed only for: `person, Teacher` 
 - [ ] Test model methods and properties. completed only for:`person, Teacher` 
 - [ ] Test model signal.
