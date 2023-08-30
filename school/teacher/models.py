@@ -18,6 +18,10 @@ class Teacher(models.Model):
     date_of_birth = models.DateField()
     address = models.TextField()
 
+    def clean_date_of_birth(self):
+        if self.date_of_birth is not None and (self.date_of_birth.year < 1900 or self.date_of_birth.year > 2023):
+            raise ValidationError("Invalid date of birth")
+
 
     def full_name(self):
         if self.user.user.first_name and self.user.user.last_name != "":
@@ -34,7 +38,7 @@ class Teacher(models.Model):
 class TeachersPerCourse(models.Model):
     cycle = models.ForeignKey("cycle.Cycle", on_delete=models.CASCADE)
     teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE)
-    coursespercycle = models.ForeignKey("course.CoursesPerCycle", on_delete=models.CASCADE, null=True)
+    coursespercycle = models.ForeignKey("course.CoursesPerCycle", on_delete=models.CASCADE)
 
     class Meta:
         verbose_name_plural = "Teachers per Course"

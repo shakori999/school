@@ -34,13 +34,18 @@ def test_teacher_full_name_without_first_and_last_name(teacher):
     # Test the full_name method
     assert teacher.full_name() == 'hussain rida'
 
+"""
+this section for testing teacherpercourse model
+"""
+
 @pytest.mark.django_db
-def test_teacher_str_method(teacher):
+def test_teachers_per_course_relationship(teachers_per_course, cycle, teacher, course_per_cycle):
+    # Create a TeachersPerCourse instance
+    tpc = teachers_per_course
+    # Retrieve the created TeachersPerCourse instance from the database
+    tpc_from_db = TeachersPerCourse.objects.get(id=tpc.id)
 
-    teacher.user.user.first_name = 'jasim'
-    teacher.user.user.last_name = 'abbas'
-    teacher.user.user.save()
-
-    # Test the __str__ method
-    assert str(teacher) == 'jasim abbas'
-
+    # Perform assertions to check the relationships
+    assert tpc_from_db.cycle == cycle
+    assert tpc_from_db.teacher == teacher
+    assert tpc_from_db.coursespercycle ==course_per_cycle 
