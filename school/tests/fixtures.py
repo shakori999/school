@@ -18,58 +18,82 @@ def create_admin_user(django_user_model):
 
 @pytest.fixture
 def user_student():
-    return User.objects.create_user(username='testuser',first_name="ali", last_name="mohammed", password='testpass')
+    student =  User.objects.create_user(username='testuser',first_name="ali", last_name="mohammed", password='testpass')
+    return student
 
+    #yield student
+    #student.delete()
 
 @pytest.fixture
 def create_student_role():
     role = Role.objects.create(role_name="student")
-    return role
 
+    return role
+    yield role
+    role.delete()
 
 @pytest.fixture
 def person_student(user_student, create_student_role):
     person = Person.objects.create(user=user_student,username=user_student.username, role=create_student_role)
     return person
-
+    #yield person
+    #person.delete()
 
 @pytest.fixture
 def cycle():
-    return Cycle.objects.create(
+    cycle =  Cycle.objects.create(
         cycledescription="Sample Cycle",
         cyclestartdate="2023-01-01",
         cycleenddate="2023-12-31",
         vacationstartdate="2023-06-01",
         vacationenddate="2023-06-15",
     )
+    return cycle
+    #yield cycle
+    #cycle.delete()
+
 
 @pytest.fixture
 def category():
-    return Category.objects.create(
+    category = Category.objects.create(
         name="Sample Category",
         categorydescription="Sample Category Description",
     )
+    return category
+    #yield category
+    #category.delete()
+
 
 
 @pytest.fixture
 def course(category):
-    return Course.objects.create(
+    course =  Course.objects.create(
         code="CS101",
         name="Introduction to Computer Science",
         category=category,
         description="This is a sample course description.",
     )
+    return course
+    #yield course
+    #course.delete()
+
 @pytest.fixture
 def course_per_cycle(course, cycle):
-    return CoursesPerCycle.objects.create(
+    cpc =  CoursesPerCycle.objects.create(
         course=course,
         cycle=cycle,
         coursestartdate="2023-01-01",
         courseenddate="2023-12-31",
     )
+    return cpc
+    #yield cpc 
+    #cpc.delete()
+    
+
+
 @pytest.fixture
 def sample_class(course, cycle, course_per_cycle):
-    return Class.objects.create(
+    class_instance = Class.objects.create(
         course=course,
         cycle=cycle,
         coursespercycle=course_per_cycle,
@@ -79,6 +103,9 @@ def sample_class(course, cycle, course_per_cycle):
         starttime="09:00:00",
         endtime="11:00:00",
     )
+    return class_instance
+    #yield class_instance
+    #class_instance.delete()
 
 @pytest.fixture
 def student(person_student, course_per_cycle):
@@ -92,6 +119,8 @@ def student(person_student, course_per_cycle):
             )
     student.courses_per_cycle.add(course_per_cycle)  # Use .add() to assign a value to many-to-many field
     return student
+    #yield student
+    #student.delete()
 
 
 @pytest.fixture
@@ -105,6 +134,9 @@ def enrollment(student, course_per_cycle):
             cancellationreason="",
         )
         return enrollment
+        #yield enrollment
+        #enrollment.delete()
     except Exception as e:
         print(f"Error creating enrollment: {e}")
         raise
+    
