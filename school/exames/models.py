@@ -6,7 +6,7 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 class Test(models.Model):
     course = models.ForeignKey("course.Course", on_delete=models.CASCADE)
     cycle = models.ForeignKey("cycle.Cycle", on_delete=models.CASCADE)
-    enrollment = models.ForeignKey("course.CoursesPerCycle", on_delete=models.CASCADE)
+    enrollment = models.ForeignKey("student.Enrollment", on_delete=models.CASCADE)
     testno = models.IntegerField(validators=[MinValueValidator(1)])
     testdate = models.DateField()
     testtime = models.TimeField()

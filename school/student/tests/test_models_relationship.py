@@ -14,7 +14,6 @@ def test_student_relationship(student, person_student, course_per_cycle, sample_
     # Retrieve the courses related to the student
     related_courses = stu_from_db.courses_per_cycle.all()
     related_classes = stu_from_db.classes.all()
-    print(related_classes)
 
     # Perform assertions to check the relationships
     assert stu_from_db.user == person_student 

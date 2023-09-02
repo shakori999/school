@@ -1,0 +1,8 @@
+{
+  "school.dashboard.tests.test_models_indexes": {
+    "test_username_index_performance": {
+      "query-count": 21,
+      "duplicates": 0
+    }
+  }
+}

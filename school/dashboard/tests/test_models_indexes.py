@@ -18,7 +18,6 @@ def test_username_index_performance(valid_persons, count_queries):
     explanation = query.explain(using='default')
 
     # Print the explanation to see its contents
-    print(f"Explanations:{explanation}")
 
     found_index_usage = False
     if "SEARCH dashboard_person USING INDEX" in explanation:
