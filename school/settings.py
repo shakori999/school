@@ -1,3 +1,4 @@
+import os
 """
 Django settings for school project.
 
@@ -132,3 +133,9 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Media root directory where uploaded files will be stored
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# URL for serving media files
+MEDIA_URL = '/media/'
