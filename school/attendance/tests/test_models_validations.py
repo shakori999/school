@@ -6,8 +6,6 @@ from django.utils import timezone
 
 from ..models import Attendance
 
-# Assuming you have fixtures or factories for related models
-
 @pytest.mark.django_db
 def test_attendance_timearrive_before_timeleave(student, course, cycle, sample_class):
 
