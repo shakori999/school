@@ -8,16 +8,16 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ("attendance", "0001_initial"),
-        ("classes", "0001_initial"),
+        ("attendance", "0003_initial"),
+        ("student", "0001_initial"),
     ]
 
     operations = [
         migrations.AddField(
             model_name="attendance",
-            name="class_info",
+            name="student",
             field=models.ForeignKey(
-                on_delete=django.db.models.deletion.CASCADE, to="classes.class"
+                on_delete=django.db.models.deletion.CASCADE, to="student.student"
             ),
         ),
     ]

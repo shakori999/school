@@ -75,7 +75,7 @@ class Submission(BaseModel):
     student = models.ForeignKey("student.Student", on_delete=models.CASCADE)
     submission_date = models.DateTimeField(
         auto_now_add=True,
-        validators=[MinValueValidator(limit_value=timezone.now())]
+        validators=[MinValueValidator(limit_value=timezone.now)]
     )
     file_upload = models.FileField(
         upload_to='submissions/',
