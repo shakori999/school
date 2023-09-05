@@ -1,5 +1,10 @@
 from django.db import models
 
+
+from django.utils import timezone
+
+from django.core.exceptions import ValidationError
+
 # Create your models here.
 class Attendance(models.Model):
     course = models.ForeignKey("course.Course", on_delete=models.CASCADE)
@@ -15,9 +20,15 @@ class Attendance(models.Model):
     def __str__(self):
         return f"{self.student.full_name()} - {self.class_info.classtitle} ({self.class_info.classdate})"
 
+
     def validate_time(self):
         if self.timearrive > self.timeleave:
-            raise models.ValidationError("Arrival time must be before leave time")
+            raise ValidationError("Arrival time must be before leave time or leave time can't be before arrival time")
+        
+        if self.timearrive > timezone.now():
+            raise ValidationError("Arrival time cannot be in the future")
+        if self.timearrive > self.timeleave:
+            raise ValidationError("Arrival time must be before leave time")
 
     def save(self, *args, **kwargs):
         self.validate_time()
