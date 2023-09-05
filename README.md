@@ -22,7 +22,7 @@ Key Features:
 
 The School Admin System aims to improve efficiency, transparency, and communication within educational institutions, ultimately enhancing the learning experience for students and easing the workload for administrators.
 
-Built with love by [murtatha].
+Built with love by [murtatha](github.com/shakori999).
 
 ## Table of Contents
 
