@@ -91,13 +91,13 @@ Use this checklist to keep track of the components you've created and tested:
 - [x] Test model creation. Completed all. 
 - [x] Test model String Representation. Completed all.
 - [ ] Test model relationships. Completed only for:`person, Teacher, student` 
-- [ ] Test model validation. Completed only for: `assignment, submission,attendance,category, person, Teacher` 
+- [ ] Test model validation. Completed only for: `assignment, submission,attendance,category,class, person, Teacher` 
 - [ ] Test model methods and properties. Completed only for:`person, Teacher` 
 - [ ] Test model signal.
 - [ ] Test model Index. Completed only for: `person`
 - [ ] Test model Meta Options.
 - [ ] Test model Model Manager.
-- [ ] Test model Data Integrity.
+- [ ] Test model Data Integrity.`assignment, submission, attendance,person`
 - [ ] Test model Integration.
 
 ### Fixtures
