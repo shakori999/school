@@ -6,6 +6,9 @@ from django.utils import timezone
 
 from ..models import Attendance
 
+'''
+this section for testing attendance model
+'''
 @pytest.mark.django_db
 def test_attendance_timearrive_before_timeleave(student, course, cycle, sample_class):
 

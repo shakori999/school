@@ -4,6 +4,9 @@ from django.db import IntegrityError
 
 from ..models import Assignment, Submission
 
+'''
+this section for testing assignemnt model
+'''
 @pytest.mark.django_db
 def test_empty_description():
     with pytest.raises(IntegrityError):

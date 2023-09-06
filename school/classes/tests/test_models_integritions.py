@@ -6,6 +6,9 @@ from django.db import IntegrityError, transaction
 
 from ..models import Class
 
+'''
+this section for testing class model
+'''
 @pytest.mark.django_db
 def test_unique_class_title(course, cycle, course_per_cycle):
     # Test invalid data: Duplicate class title

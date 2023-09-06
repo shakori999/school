@@ -14,6 +14,9 @@ class Course(BaseModel):
     abstract = models.TextField(default="abstract")
     bibliography = models.TextField(default="book")
 
+    class Meta:
+        verbose_name_plural = 'courses'
+
     def __str__(self):
         return self.name
 
@@ -35,32 +38,8 @@ class CoursesPerCycle(models.Model):
     def __str__(self):
         return f"{self.course.name} ({self.cycle.cyclestartdate} - {self.cycle.cycleenddate})"
 
-    #students = models.ManyToManyField("student.Student", related_name='courses_enrolled', blank=True)
-    #enrollment_strategy = models.CharField(max_length=50)
-
-
-    #def get_enrollment_strategy(self):
-    #    if self.enrollment_strategy == 'premium':
-    #        return PremiumEnrollmentStrategy()
-    #    else:
-    #        return DefaultEnrollmentStrategy()
-
-    #def enroll_student(self, student):
-    #    strategy = self.get_enrollment_strategy()
-    #    strategy.enroll(self, student)
-    #    self.save()
-
-
     #def is_student_enrolled(self, student):
     #    return self.students.filter(id=student.id).exists()
 
     #def remove_student(self, student):
     #    self.students.remove(student)
-
-    #def __str__(self):
-    #    return self.name
-
-    #class Meta:
-    #    verbose_name_plural = 'Classes'
-
-

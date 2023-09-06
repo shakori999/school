@@ -7,6 +7,10 @@ from django.db.utils import IntegrityError
 
 from ..models import Attendance
 
+'''
+this section for testing attendance model
+'''
+
 @pytest.mark.django_db
 def test_attendance_course_integration_error(cycle,student, sample_class):
     # Create an aware datetime for the leave time, ensuring it's after the arrive time
