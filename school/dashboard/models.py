@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
+from django.dispatch import receiver
+from django.db.models.signals import post_delete
 
 # Create your models here.
 class Role(models.Model):
@@ -30,6 +32,17 @@ class Person(BaseModel):
     email = models.EmailField()
     role = models.ForeignKey(Role, on_delete=models.CASCADE)
 
+    def delete(self, *args, **kwargs):
+        # Call the User's delete method when deleting the Person
+        if self.user:
+            self.user.delete()
+        super(Person, self).delete(*args, **kwargs)
+
     def __str__(self):
         return f"{self.user.username} - {self.role}"
 
+@receiver(post_delete, sender=Person)
+def post_delete_user(sender, instance, *args, **kwargs):
+    # This signal handles cases where Persons are deleted using querysets
+    if instance.user:
+        instance.user.delete()

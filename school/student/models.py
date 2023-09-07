@@ -1,4 +1,7 @@
 from django.db import models
+from django.dispatch import receiver
+from django.db.models.signals import post_delete
+
 from ..dashboard.models import Person 
 
 
@@ -24,8 +27,11 @@ class Student(models.Model):
             return f"{self.user.user.first_name} {self.user.user.last_name}"
         return self.user.user.username
 
+
     def __str__(self):
         return self.full_name()
+
+
 
 class Enrollment(models.Model):
     course_per_cycle = models.ForeignKey("course.CoursesPerCycle", on_delete=models.CASCADE)

@@ -22,6 +22,7 @@ def person_student(user_student, create_student_role):
     person = Person.objects.create(user=user_student,username=user_student.username, role=create_student_role)
     return person
 
+
 @pytest.fixture
 def student(person_student, course_per_cycle):
     student = Student.objects.create(
