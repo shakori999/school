@@ -1,5 +1,7 @@
 from django.db import models
 from django.core.exceptions import ValidationError
+from django.dispatch import receiver
+from django.db.models.signals import post_delete
 
 from ..dashboard.models import Person
 
@@ -22,6 +24,11 @@ class Teacher(models.Model):
         if self.date_of_birth is not None and (self.date_of_birth.year < 1900 or self.date_of_birth.year > 2023):
             raise ValidationError("Invalid date of birth")
 
+    def delete(self, *args, **kwargs):
+        # Call the User's delete method when deleting the Person
+        if self.user:
+            self.user.delete()
+        super(Teacher, self).delete(*args, **kwargs)
 
     def full_name(self):
         if self.user.user.first_name and self.user.user.last_name != "":
@@ -34,6 +41,10 @@ class Teacher(models.Model):
 
     class Meta:
         verbose_name_plural = "Teachers"
+
+@receiver(post_delete, sender=Teacher)
+def post_delete_user(sender, instance, *args, **kwargs):
+        instance.user.delete()
 
 class TeachersPerCourse(models.Model):
     cycle = models.ForeignKey("cycle.Cycle", on_delete=models.CASCADE)

@@ -16,6 +16,13 @@ class Student(models.Model):
     phoneno = models.CharField(max_length=20)
     address = models.TextField()
 
+
+    def delete(self, *args, **kwargs):
+        # Call the User's delete method when deleting the Person
+        if self.user:
+            self.user.delete()
+        super(Student, self).delete(*args, **kwargs)
+
     class Meta:
         indexes = [
             models.Index(fields=['phoneno']),
@@ -31,7 +38,9 @@ class Student(models.Model):
     def __str__(self):
         return self.full_name()
 
-
+@receiver(post_delete, sender=Student)
+def post_delete_user(sender, instance, *args, **kwargs):
+        instance.user.delete()
 
 class Enrollment(models.Model):
     course_per_cycle = models.ForeignKey("course.CoursesPerCycle", on_delete=models.CASCADE)

@@ -57,7 +57,6 @@ def test_unique_constraint(duplicate_person):
     with pytest.raises(IntegrityError):
         duplicate_person.save()
 
-
 @pytest.mark.django_db
 def test_person_user_null():
     # Test that a Person instance can be created with a null user field
@@ -98,7 +97,6 @@ def test_person_email_validity(create_student_role, user_student):
         person = Person(user_student,username="user",password_hash="password",email=invalid_email, role=create_student_role)
         person.full_clean()
 
-
 @pytest.mark.django_db
 def test_person_role_assignment_validation_error(user_student):
     # Test that you cannot create a Person instance with a non-existing role (ValidationError)
@@ -109,7 +107,6 @@ def test_person_role_assignment_validation_error(user_student):
     # Ensure that the validation error message is as expected
     assert "role instance with id 999 does not exist." in str(e.value)
 
-"""
 @pytest.mark.django_db
 def test_person_user_deletion_cascades(valid_person):
     # Ensure that when a Person instance is deleted, it also deletes the associated User instance
@@ -122,14 +119,3 @@ def test_person_user_deletion_cascades(valid_person):
 
     assert not Person.objects.filter(username="testuser").exists()
     assert not User.objects.filter(username="testuser").exists()
-
-@pytest.mark.django_db
-def test_role_deletion_protection():
-    # Ensure that you cannot delete a Role instance if it is associated with any Person
-    role = Role.objects.create(role_name="Role")
-    person = Person(username="user", password_hash="password", email="user@example.com", role=role)
-    person.save()
-
-    with pytest.raises(IntegrityError):
-        role.delete()
-"""
