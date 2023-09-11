@@ -107,7 +107,8 @@ Use this checklist to keep track of the components you've created and tested:
 
 ### Serializers 
 
-- [ ] Create serializers for `Assignment` model
+- [x] Create serializers for `Assignment` model
+- [x] Create serializers for `Submission` model
 - [ ] Create serializers for `Attendance` model
 - [ ] Create serializers for `Category` model
 - [ ] Create serializers for `Class` model
