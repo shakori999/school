@@ -1,5 +1,7 @@
 import pytest
 
+from datetime import timedelta,date
+
 from ..exames.models import Test, TestsScores
 
 @pytest.fixture
@@ -28,3 +30,12 @@ def sample_testscore(course, cycle,student, sample_test):
     return testscore
 
 
+@pytest.fixture
+def valid_test_data():
+    return {
+        "testtime" : "10:23:02",
+        'testdate': '2023-09-15',  # Replace with a valid date string
+        "testno": 1,
+        "agenda": "Valid agenda",
+        # Add other required fields here
+    }

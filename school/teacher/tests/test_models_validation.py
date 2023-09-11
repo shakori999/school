@@ -3,6 +3,9 @@ from django.db.utils import IntegrityError
 from django.core.exceptions import ValidationError
 from ...teacher.models import TeachersPerCourse
 
+'''
+this section for testing teacher model
+'''
 @pytest.mark.django_db
 def test_teacher_invalid_username(teacher_invalid_username):
     with pytest.raises(ValidationError) as e:

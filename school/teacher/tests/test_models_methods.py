@@ -3,6 +3,10 @@ from django.db.utils import IntegrityError
 
 from ..models import TeachersPerCourse
 
+'''
+this section for testing teacher model
+'''
+
 @pytest.mark.django_db
 def test_teachers_per_course_unique(teachers_per_course):
 

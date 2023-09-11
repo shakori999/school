@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils import timezone
 from django.core.validators import MinValueValidator, MaxValueValidator
+from django.core.exceptions import ValidationError
 
 # Create your models here.
 class Test(models.Model):
@@ -10,7 +11,7 @@ class Test(models.Model):
     testno = models.IntegerField(validators=[MinValueValidator(1)])
     testdate = models.DateField()
     testtime = models.TimeField()
-    agenda = models.TextField()
+    agenda = models.TextField(max_length=200)
 
 
     class Meta:
@@ -18,7 +19,7 @@ class Test(models.Model):
 
     def clean(self):
         if self.testdate < timezone.now().date():
-            raise models.ValidationError("Test date cannot be in the past")
+            raise ValidationError("Test date cannot be in the past")
 
     def __str__(self):
         return f"{self.course.name} - Test {self.testno} ({self.testdate} at {self.testtime})"
@@ -38,7 +39,10 @@ class TestsScores(models.Model):
 
     def clean(self):
         if self.score < 0 or self.score > 100:
-            raise models.ValidationError("Score must be between 0 and 100")
+            raise ValidationError("Score must be between 0 and 100")
+        
+        if self.testsno is not None and self.testsno <= 0:
+            raise ValidationError("Ensure this value is greater than or equal to 1")
 
     def __str__(self):
         return f"{self.student.full_name()} - {self.test.course.name} - Test {self.testsno}: {self.score}"
