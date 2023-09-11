@@ -1,6 +1,8 @@
 from django.db import models
 from django.dispatch import receiver
 from django.db.models.signals import post_delete
+from django.core.exceptions import ValidationError
+from django.utils import timezone
 
 from ..dashboard.models import Person 
 
@@ -47,10 +49,18 @@ class Enrollment(models.Model):
     student = models.ForeignKey(Student, on_delete=models.CASCADE)
     enrollmentdate = models.DateField(null=True)
     cancelled = models.BooleanField(default=False)
-    cancellationreason = models.TextField()
+    cancellationreason = models.TextField(blank=True)
 
     class Meta:
         verbose_name_plural = "Enrollments"
+
+    def clean(self):
+        if self.cancelled and not self.cancellationreason:
+            raise ValidationError("Cancellation reason is required for canceled enrollments")
+
+        if self.enrollmentdate and self.enrollmentdate < timezone.now().date():
+            raise ValidationError("Enrollment date cannot be in the past")
+
 
     def __str__(self):
         return f"{self.student.full_name()} - {self.course_per_cycle.course.name}"

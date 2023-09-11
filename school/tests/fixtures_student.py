@@ -1,5 +1,7 @@
 import datetime
 import pytest
+
+from django.utils import timezone
 from django.contrib.auth.models import User
 
 from ..dashboard.models import Role, Person
@@ -44,7 +46,7 @@ def enrollment(student, course_per_cycle):
         enrollment = Enrollment.objects.create(
             course_per_cycle=course_per_cycle,
             student=student,
-            enrollmentdate=datetime.date(2023, 1, 1),
+            enrollmentdate=timezone.now().date(),
             cancelled=False,
             cancellationreason="",
         )
