@@ -1,5 +1,10 @@
+import tempfile
 import pytest
+import os
 
+from datetime import timedelta
+
+from django.core.files.uploadedfile import SimpleUploadedFile
 from django.core.files.base import ContentFile
 from django.utils import timezone
 from django.core.files.uploadedfile import SimpleUploadedFile
@@ -46,19 +51,22 @@ this section for testing submission model
 """
 # Test Submission Model Validation
 
+# Create a test file with some content
+test_file = SimpleUploadedFile("non_existent_file.pdf", b"file_content_here")
+
 @pytest.mark.django_db
 def test_file_exist(assignment, student):
     with pytest.raises(FileNotFoundError) as e:
         sub = Submission.objects.create(
             assignment = assignment,
             student=student,
-            submission_date="2023-01-01",
             file_upload="b.pdf",
         )
         sub.full_clean()
-        print(e.value)
 
     assert "No such file or directory" in str(e.value)
+    assert sub.submission_date is not None
+    assert sub.submission_date >= timezone.now().replace(second=0, microsecond=0)
 
 @pytest.mark.django_db
 def test_submission_file_upload_validation(assignment, student):
@@ -82,7 +90,6 @@ def test_empty_file_upload(student, assignment):
         sub = Submission.objects.create(
             assignment=assignment,
             student=student,
-            submission_date="2023-01-01",
             file_upload="",  # Empty file_upload field
         )
         sub.full_clean()
@@ -125,12 +132,11 @@ def test_long_file_name(assignment, student):
         sub = Submission.objects.create(
             assignment=assignment,
             student=student,
-            submission_date="2023-01-01",
             file_upload=long_file,
         )
         sub.full_clean()
 
-    assert "File name exceeds maximum length of 43 characters" in str(e.value)
+    assert "File name exceeds maximum length of 50 characters" in str(e.value)
 
 @pytest.mark.django_db
 def test_file_upload_with_unsupported_type(assignment, student):
@@ -142,13 +148,12 @@ def test_file_upload_with_unsupported_type(assignment, student):
         sub = Submission.objects.create(
             assignment = assignment,
             student=student,
-            submission_date="2023-01-01",
             file_upload=unsupported_file,  # Unsupported file type
         )
         sub.full_clean()
 
     # Check that the expected validation error message is raised
-    assert "File type not supported. Supported types: pdf" in str(e.value)
+    assert "Unsupported file format. Supported formats: .pdf, .doc, .docx']" in str(e.value)
 
 @pytest.mark.django_db
 def test_file_max_size_exceeded(assignment, student):
@@ -159,17 +164,14 @@ def test_file_max_size_exceeded(assignment, student):
     # Create a ContentFile instance with the oversized content
     oversized_file = ContentFile(oversized_content, name="oversized_file.pdf")
 
-    # Create an offset-aware datetime object for the submission date
-    submission_date = timezone.now()  # Use timezone.now() to get the current time
-
     with pytest.raises(ValidationError) as e:
         sub = Submission(
             assignment=assignment,
             student=student,
-            submission_date=submission_date,
             file_upload=oversized_file,
         )
         sub.full_clean()
 
     # Check that the expected validation error message is raised
     assert "File size exceeds the maximum allowed size of 10485760 bytes." in str(e.value)
+

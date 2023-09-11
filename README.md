@@ -105,8 +105,43 @@ Use this checklist to keep track of the components you've created and tested:
 - [x] Create fixtures for models using pytest fixtures.
 - [x] Include sample data for each model to be used in tests.
 
+### Serializers 
+
+- [ ] Create serializers for `Assignment` model
+- [ ] Create serializers for `Attendance` model
+- [ ] Create serializers for `Category` model
+- [ ] Create serializers for `Class` model
+- [ ] Create serializers for `Course` model
+- [ ] Create serializers for `CoursesPerCycle` model
+- [ ] Create serializers for `Cycle` model
+- [ ] Create serializers for `Role` model
+- [ ] Create serializers for `Person` model
+- [ ] Create serializers for `Test` model
+- [ ] Create serializers for `TestScores` model
+- [ ] Create serializers for `Student` model
+- [ ] Create serializers for `Enrollment` model
+- [ ] Create serializers for `Teacher` model
+- [ ] Create serializers for `TeachersPerCourse` model
+
 ### Views and Templates 
 
+- [ ] Create views for `Assignment` model (List, Detail, Create, Update, Delete)
+- [ ] Create views for `Submission` model (List, Detail, Create, Update, Delete)
+- [ ] Create views for `Attendance` model (List, Detail, Create, Update, Delete)
+- [ ] Create views for `Category` model (List, Detail, Create, Update, Delete)
+- [ ] Create views for `Class` model (List, Detail, Create, Update, Delete)
+- [ ] Create views for `Course` model (List, Detail, Create, Update, Delete)
+- [ ] Create views for `CoursesPerCycle` model (List, Detail, Create, Update, Delete)
+- [ ] Create views for `Cycle` model (List, Detail, Create, Update, Delete)
+- [ ] Create views for `Role` model (List, Detail, Create, Update, Delete)
+- [ ] Create views for `BaseModel` model (List, Detail, Create, Update, Delete)
+- [ ] Create views for `Person` model (List, Detail, Create, Update, Delete)
+- [ ] Create views for `Test` model (List, Detail, Create, Update, Delete)
+- [ ] Create views for `TestScores` model (List, Detail, Create, Update, Delete)
+- [ ] Create views for `Student` model (List, Detail, Create, Update, Delete)
+- [ ] Create views for `Enrollment` model (List, Detail, Create, Update, Delete)
+- [ ] Create views for `Teacher` model (List, Detail, Create, Update, Delete)
+- [ ] Create views for `TeachersPerCourse` model (List, Detail, Create, Update, Delete)
 - [ ] Create views for displaying data in your application.
 - [ ] Design templates for rendering the data in a user-friendly way.
 

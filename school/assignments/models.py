@@ -41,41 +41,33 @@ def validate_submission_file(value):
 
     # Check if the not blank
     if not value:
-        errors.append("This field cannot be blank.")
-
-    # Check if the file exists
-    if not os.path.isfile(value.path):
-        errors.append("File does not exist.")
+        raise ValidationError("This field cannot be blank.")
 
     # Check the file size (adjust the limit as needed)
     max_file_size = 10 * 1024 * 1024  # 10 MB
     if value.size > max_file_size:
-        errors.append(f"File size exceeds the maximum allowed size of {max_file_size} bytes.")
+        raise ValidationError(f"File size exceeds the maximum allowed size of {max_file_size} bytes.")
 
-    # Check the file's content type using python-magic
-    mime = magic.Magic()
-    detected_mime_type = mime.from_buffer(value.read(1024))  # Read the first 1024 bytes to determine the file type
-
-    # Define supported mime types
-    supported_mime_types = ['application/pdf']
-
-    if detected_mime_type not in supported_mime_types:
-        errors.append("File type not supported. Supported types: pdf")
+    # Here's an example of how to check the file extension:
+    allowed_extensions = ['.pdf', '.doc', '.docx']
+    file_name = value.name
+    if not file_name.lower().endswith(tuple(allowed_extensions)):
+        raise ValidationError(f"Unsupported file format. Supported formats: {', '.join(allowed_extensions)}")
 
     # Check the file name length
-    max_length = 43  # Set your desired maximum length for file names
+    max_length = 50  # Set your desired maximum length for file names
     if len(value.name) > max_length:
-        errors.append(f"File name exceeds maximum length of {max_length} characters.")
+        raise ValidationError(f"File name exceeds maximum length of {max_length} characters.")
 
-    if errors:
-        raise ValidationError(errors)
+    return value
+
 
 class Submission(BaseModel):
     assignment = models.ForeignKey(Assignment, on_delete=models.CASCADE)
     student = models.ForeignKey("student.Student", on_delete=models.CASCADE)
     submission_date = models.DateTimeField(
         auto_now_add=True,
-        validators=[MinValueValidator(limit_value=timezone.now)]
+        validators=[MinValueValidator(limit_value=timezone.now().replace(second=0, microsecond=0))]
     )
     file_upload = models.FileField(
         upload_to='submissions/',
@@ -87,6 +79,7 @@ class Submission(BaseModel):
         # For example, you can implement logic to process the submission
         # This method should be customized based on your project's requirements
         pass
+
 
     class Meta:
         verbose_name_plural = "Submissions"

@@ -48,6 +48,9 @@ INSTALLED_APPS = [
     'school.classes',
     'school.attendance',
     'school.exames',
+
+    # third-party
+    'rest_framework',
 ]
 
 MIDDLEWARE = [

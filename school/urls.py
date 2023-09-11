@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.conf.urls.static import static
+
 """
 URL configuration for school project.
 
@@ -16,11 +17,24 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+
 from django.contrib import admin
-from django.urls import path
+from django.urls import path 
+
+from .assignments.views import (
+
+        AssignmentListView,
+        AssignmentDetailView,
+        SubmissionListView,
+        SubmissionDetailView,
+    ) 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api/assignments/', AssignmentListView.as_view(), name='assignment-list'),
+    path('api/assignment/<int:pk>/', AssignmentDetailView.as_view(), name='assignment-detail'),
+    path('api/submissions/', SubmissionListView.as_view(), name='submission-list'),
+    path('api/submission/<int:pk>/', SubmissionDetailView.as_view(), name='submission-detail'),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
