@@ -61,7 +61,7 @@ def validate_submission_file(value):
 class Submission(BaseModel):
     assignment = models.ForeignKey(Assignment, on_delete=models.CASCADE)
     student = models.ForeignKey("student.Student", on_delete=models.CASCADE)
-    submission_date = models.DateTimeField(
+    submission_date = models.DateField(
         default=timezone.now,
         validators=[MinValueValidator(limit_value=timezone.now().date())],
     )

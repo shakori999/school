@@ -1,7 +1,11 @@
-from django.utils import timezone
 import pytest
 
+from django.utils import timezone
+
 from ..attendance.models import Attendance
+from ..attendance.serializers import AttendanceSerializer
+
+from rest_framework.test import APIClient
 
 @pytest.fixture
 def attendance(course, cycle, sample_class, student):
@@ -22,3 +26,12 @@ def attendance(course, cycle, sample_class, student):
 
     )
     return attendance
+
+@pytest.fixture
+def serializer():
+    return AttendanceSerializer()
+
+
+@pytest.fixture
+def api_client():
+    return APIClient()

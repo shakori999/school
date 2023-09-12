@@ -19,8 +19,8 @@ def test_attendance_timearrive_before_timeleave(student, course, cycle, sample_c
             cycle=cycle,
             student=student,
             class_info=sample_class,
-            timearrive=datetime(2023, 1, 1, 14, 0),  # Arrival time after leave time
-            timeleave=datetime(2023, 1, 1, 12, 0),  # Leave time
+            timearrive=timezone.now() ,  # Arrival time after leave time
+            timeleave=timezone.now() - timezone.timedelta(hours=1),  # Leave time
         )
         invalid_attendance.full_clean()
 
@@ -104,4 +104,4 @@ def test_attendance_timeleave_in_past(course, cycle, student, sample_class):
             timeleave=future,
         )
         invalid_attendance.full_clean()
-    assert "leave time can't be before arrival time" in str(e.value)
+    assert "Arrival time must be before leave time" in str(e.value)

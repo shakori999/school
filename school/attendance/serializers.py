@@ -16,15 +16,19 @@ class AttendanceSerializer(serializers.ModelSerializer):
         timearrive = data.get('timearrive')
         timeleave = data.get('timeleave')
 
-        if timearrive > timeleave:
-            raise serializers.ValidationError("Arrival time must be before leave time.")
-
-        if timearrive  > timezone.now():
+        if timearrive > timezone.now():
             raise serializers.ValidationError("Arrival time cannot be in the future.")
 
+        if timearrive > timeleave:
+            raise serializers.ValidationError("Arrival time must be before leave time.")
         return data
 
     def create(self, validated_data):
         # Automatically set the timearrive field to the current time
         validated_data['timearrive'] = timezone.now()
-        return super().create(validated_data)
+
+        # Create a new instance of the Attendance model with the updated data
+        attendance = Attendance(**validated_data)
+        attendance.save()
+
+        return attendance

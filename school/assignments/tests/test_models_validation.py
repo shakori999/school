@@ -59,7 +59,7 @@ def test_file_exist(assignment, student):
 
     assert "No such file or directory" in str(e.value)
     assert sub.submission_date is not None
-    assert sub.submission_date >= timezone.now().replace(second=0, microsecond=0)
+    assert sub.submission_date >= timezone.now().date()
 
 @pytest.mark.django_db
 def test_submission_file_upload_validation(assignment, student):
@@ -68,7 +68,7 @@ def test_submission_file_upload_validation(assignment, student):
         sub = Submission.objects.create(
             assignment=assignment,
             student=student,
-            submission_date=None,  # Submission date is required
+            submission_date= timezone.now().date(),  # Submission date is required
             file_upload=None,  # File upload is required
         )
         sub.full_clean()

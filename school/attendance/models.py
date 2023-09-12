@@ -23,6 +23,7 @@ class Attendance(models.Model):
     def validate_time(self):
         if self.timearrive > timezone.now():
             raise ValidationError("Arrival time cannot be in the future")
+
         if self.timearrive > self.timeleave:
             raise ValidationError("Arrival time must be before leave time")
 
