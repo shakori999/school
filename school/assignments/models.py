@@ -1,10 +1,8 @@
-import os
-import magic
 from django.utils import timezone
 
 from django.db import models
 from django.core.exceptions import ValidationError
-from django.core.validators import MinValueValidator, FileExtensionValidator
+from django.core.validators import MinValueValidator
 
 from ..dashboard.models import BaseModel
 
@@ -37,8 +35,6 @@ class Assignment(BaseModel):
         return self.title
 
 def validate_submission_file(value):
-    errors = []
-
     # Check if the not blank
     if not value:
         raise ValidationError("This field cannot be blank.")
@@ -66,8 +62,8 @@ class Submission(BaseModel):
     assignment = models.ForeignKey(Assignment, on_delete=models.CASCADE)
     student = models.ForeignKey("student.Student", on_delete=models.CASCADE)
     submission_date = models.DateTimeField(
-        auto_now_add=True,
-        validators=[MinValueValidator(limit_value=timezone.now().replace(second=0, microsecond=0))]
+        default=timezone.now,
+        validators=[MinValueValidator(limit_value=timezone.now().date())],
     )
     file_upload = models.FileField(
         upload_to='submissions/',

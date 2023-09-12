@@ -1,8 +1,4 @@
-import tempfile
 import pytest
-import os
-
-from datetime import timedelta
 
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.core.files.base import ContentFile
@@ -50,9 +46,6 @@ def test_assignment_due_date_validation(assignment_with_invlaid_date):
 this section for testing submission model
 """
 # Test Submission Model Validation
-
-# Create a test file with some content
-test_file = SimpleUploadedFile("non_existent_file.pdf", b"file_content_here")
 
 @pytest.mark.django_db
 def test_file_exist(assignment, student):

@@ -11,7 +11,7 @@ class Attendance(models.Model):
     cycle = models.ForeignKey("cycle.Cycle", on_delete=models.CASCADE)
     student = models.ForeignKey("student.Student", on_delete=models.CASCADE)
     class_info = models.ForeignKey("classes.Class", on_delete=models.CASCADE)
-    timearrive = models.DateTimeField()
+    timearrive = models.DateTimeField(default=timezone.now)
     timeleave = models.DateTimeField()
 
     class Meta:
@@ -20,11 +20,7 @@ class Attendance(models.Model):
     def __str__(self):
         return f"{self.student.full_name()} - {self.class_info.classtitle} ({self.class_info.classdate})"
 
-
     def validate_time(self):
-        if self.timearrive > self.timeleave:
-            raise ValidationError("Arrival time must be before leave time or leave time can't be before arrival time")
-        
         if self.timearrive > timezone.now():
             raise ValidationError("Arrival time cannot be in the future")
         if self.timearrive > self.timeleave:

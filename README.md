@@ -109,7 +109,7 @@ Use this checklist to keep track of the components you've created and tested:
 
 - [x] Create serializers for `Assignment` model
 - [x] Create serializers for `Submission` model
-- [ ] Create serializers for `Attendance` model
+- [x] Create serializers for `Attendance` model
 - [ ] Create serializers for `Category` model
 - [ ] Create serializers for `Class` model
 - [ ] Create serializers for `Course` model
@@ -126,9 +126,9 @@ Use this checklist to keep track of the components you've created and tested:
 
 ### Views and Templates 
 
-- [ ] Create views for `Assignment` model (List, Detail, Create, Update, Delete)
-- [ ] Create views for `Submission` model (List, Detail, Create, Update, Delete)
-- [ ] Create views for `Attendance` model (List, Detail, Create, Update, Delete)
+- [x] Create views for `Assignment` model (List, Detail, Create, Update, Delete)
+- [x] Create views for `Submission` model (List, Detail, Create, Update, Delete)
+- [x] Create views for `Attendance` model (List, Detail, Create, Update, Delete)
 - [ ] Create views for `Category` model (List, Detail, Create, Update, Delete)
 - [ ] Create views for `Class` model (List, Detail, Create, Update, Delete)
 - [ ] Create views for `Course` model (List, Detail, Create, Update, Delete)

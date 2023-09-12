@@ -22,12 +22,15 @@ from django.contrib import admin
 from django.urls import path 
 
 from .assignments.views import (
-
         AssignmentListView,
         AssignmentDetailView,
         SubmissionListView,
         SubmissionDetailView,
     ) 
+from .attendance.views import (
+        AttendanceListView,
+        AttendanceDetailView,
+    )
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -35,6 +38,8 @@ urlpatterns = [
     path('api/assignment/<int:pk>/', AssignmentDetailView.as_view(), name='assignment-detail'),
     path('api/submissions/', SubmissionListView.as_view(), name='submission-list'),
     path('api/submission/<int:pk>/', SubmissionDetailView.as_view(), name='submission-detail'),
+    path('api/attendances/', AttendanceListView.as_view(), name='attendance-list'),
+    path('api/attendance/<int:pk>/', AttendanceDetailView.as_view(), name='attendance-detail'),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
