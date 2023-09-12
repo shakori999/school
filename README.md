@@ -1,24 +1,17 @@
-# school_management_system
+# School Management System
 
 The School Admin System is a comprehensive administrative tool designed to streamline and simplify school management processes. It serves as a central hub for managing student information, courses, assignments, attendance, and more. Developed using Django, a high-level Python web framework, this system empowers educational institutions with efficient tools for tracking student progress, automating administrative tasks, and enhancing communication between staff, students, and parents.
 
-Key Features:
+**Key Features:**
 
-    Student Management: Easily manage student records, including personal information, enrollment, and attendance.
-
-    Course Management: Create, update, and track courses and class schedules.
-
-    Assignment Tracking: Assign and monitor student assignments with due dates, descriptions, and file uploads.
-
-    Attendance Tracking: Keep accurate attendance records and generate reports for analysis.
-
-    User-Friendly Interface: An intuitive and user-friendly web interface for both administrators and end-users.
-
-    Customization: Adapt the system to your school's specific needs with easy-to-configure settings.
-
-    Security: Implement role-based access control to safeguard sensitive data.
-
-    Scalability: Designed for scalability, making it suitable for schools of all sizes.
+- Student Management: Easily manage student records, including personal information, enrollment, and attendance.
+- Course Management: Create, update, and track courses and class schedules.
+- Assignment Tracking: Assign and monitor student assignments with due dates, descriptions, and file uploads.
+- Attendance Tracking: Keep accurate attendance records and generate reports for analysis.
+- User-Friendly Interface: An intuitive and user-friendly web interface for both administrators and end-users.
+- Customization: Adapt the system to your school's specific needs with easy-to-configure settings.
+- Security: Implement role-based access control to safeguard sensitive data.
+- Scalability: Designed for scalability, making it suitable for schools of all sizes.
 
 The School Admin System aims to improve efficiency, transparency, and communication within educational institutions, ultimately enhancing the learning experience for students and easing the workload for administrators.
 
@@ -41,60 +34,42 @@ Use this checklist to keep track of the components you've created and tested:
 
 ### Models
 
-- [x] Create models for
-
-#### Assignments
-- [x] `Assignment`
-- [x] `Submission`
-
-#### Attendance
-- [x] `Attendance`
-
-#### Categories
-- [x] `Category`
-
-#### Classes
-- [x] `Class`
-
-#### Course
-- [x] `Course`
-- [x] `CoursesPerCycle`
-
-#### Cycle
-- [x] `Cycle`
-
-#### Dashboard
-- [x] `Role`
-- [x] `BaseModel`
-- [x] `Person`
-
-#### Exams
-- [x] `Test`
-- [x] `TestScores`
-
-#### Student
-- [x] `Student`
-- [x] `Enrollment`
-
-#### Teacher
-- [x] `Teacher`
-- [x] `TeachersPerCourse`
-
+- [x] Create models for:
+  - [x] `Assignment`
+  - [x] `Submission`
+  - [x] `Attendance`
+  - [x] `Category`
+  - [x] `Class`
+  - [x] `Course`
+  - [x] `CoursesPerCycle`
+  - [x] `Cycle`
+  - [x] `Dashboard`
+  - [x] `Role`
+  - [x] `BaseModel`
+  - [x] `Person`
+  - [x] `Exams`
+  - [x] `Test`
+  - [x] `TestScores`
+  - [x] `Student`
+  - [x] `Enrollment`
+  - [x] `Teacher`
+  - [x] `TeachersPerCourse`
+  
 - [x] Define necessary fields and relationships for each model.
 - [x] Run migrations to create database tables.
-- [ ] create more models.
-- [ ] link them better.
+- [ ] Create more models.
+- [ ] Link them better.
 
 ### Tests
 
 - [x] Write unit tests for models using pytest and Django's TestCase.
-- [x] Test model creation. Completed all. 
+- [x] Test model creation. Completed all.
 - [x] Test model String Representation. Completed all.
-- [x] Test model validation. Completed all. 
-- [ ] Test model Data Integrity.`assignment, submission, attendance, Role, person`
-- [ ] Test model relationships. Completed only for:`person, Teacher, student` 
-- [ ] Test model methods and properties. Completed only for:`person, Teacher` 
-- [ ] Test model Index. Completed only for: `person`
+- [x] Test model validation. Completed all.
+- [ ] Test model Data Integrity (e.g., `assignment`, `submission`, `attendance`, `Role`, `person`).
+- [ ] Test model relationships. Completed only for: `person`, `Teacher`, `student`.
+- [ ] Test model methods and properties. Completed only for: `person`, `Teacher`.
+- [ ] Test model Index. Completed only for: `person`.
 - [ ] Test model signal.
 - [ ] Test model Meta Options.
 - [ ] Test model Model Manager.
@@ -168,16 +143,6 @@ Follow this checklist to thoroughly test your serializers:
 - [ ] **Test Serializer Nested Validations**:
   - If your serializer includes nested serializers, create tests to validate nested data and nested validations.
 
-## Running Tests
-
-To run your serializer tests, use pytest or Django's TestCase. Make sure your tests cover various scenarios, including common cases, edge cases, and error handling.
-
-# Run tests with pytest
-pytest your_app/tests/test_serializers.py
-
-# Run tests with Django's TestCase
-python manage.py test your_app.tests.test_serializers
-
 
 ### Views and Templates 
 
@@ -220,8 +185,7 @@ python manage.py test your_app.tests.test_serializers
 
 ## Installation
 
-prerequisites, virtual environment setup, and any dependencies needed.
-
+Follow these steps to set up your project:
 ### Django Installation
 
 1. Ensure you have Python installed. You can download it from the official [Python website](https://www.python.org/downloads/).
@@ -248,6 +212,16 @@ To run tests using pytest, follow these steps:
 2. Run the following command to execute all tests:
 
 3. To run specific tests, use the following command:
+
+## Running Tests
+
+To run your serializer tests, use pytest or Django's TestCase. Make sure your tests cover various scenarios, including common cases, edge cases, and error handling.
+
+# Run tests with pytest
+pytest your_app/tests/test_serializers.py
+
+# Run tests with Django's TestCase
+python manage.py test your_app.tests.test_serializers
 
 ## Contributing
 
