@@ -15,7 +15,7 @@ The School Admin System is a comprehensive administrative tool designed to strea
 
 The School Admin System aims to improve efficiency, transparency, and communication within educational institutions, ultimately enhancing the learning experience for students and easing the workload for administrators.
 
-Built with love by [murtatha](https://www.github.com/shakori999/).
+Built with hate by [murtatha](https://www.github.com/shakori999/).
 
 ## Table of Contents
 
@@ -60,7 +60,31 @@ Use this checklist to keep track of the components you've created and tested:
 - [ ] Create more models.
 - [ ] Link them better.
 
-### Tests
+### Serializers 
+
+- [x] Create serializers for all models. `Completed all.` 
+
+### Views and Templates 
+
+- [x] Create views for all models (List, Detail, Create, Update, Delete)
+- [ ] Create views for displaying data in your application.
+- [ ] Design templates for rendering the data in a user-friendly way.
+
+### URLs and Routing 
+
+- [x] Define URL patterns for your application's views.
+- [ ] Set up routing to connect URLs to views.
+
+### Fixtures
+
+- [x] Create fixtures for models using pytest fixtures.
+- [x] Include sample data for each model to be used in tests.
+
+# Testing Serializers
+
+Testing serializers is crucial to ensure your Django project's API behaves correctly and handles data validation and conversion accurately. This section outlines the steps to test your serializers using pytest and Django's TestCase.
+
+### Testing Models
 
 - [x] Write unit tests for models using pytest and Django's TestCase.
 - [x] Test model creation. Completed all.
@@ -75,35 +99,7 @@ Use this checklist to keep track of the components you've created and tested:
 - [ ] Test model Model Manager.
 - [ ] Test model Integration.
 
-### Fixtures
-
-- [x] Create fixtures for models using pytest fixtures.
-- [x] Include sample data for each model to be used in tests.
-
-### Serializers 
-
-- [x] Create serializers for `Assignment` model
-- [x] Create serializers for `Submission` model
-- [x] Create serializers for `Attendance` model
-- [x] Create serializers for `Category` model
-- [x] Create serializers for `Class` model
-- [x] Create serializers for `Course` model
-- [x] Create serializers for `CoursesPerCycle` model
-- [ ] Create serializers for `Cycle` model
-- [ ] Create serializers for `Role` model
-- [ ] Create serializers for `Person` model
-- [ ] Create serializers for `Test` model
-- [ ] Create serializers for `TestScores` model
-- [ ] Create serializers for `Student` model
-- [ ] Create serializers for `Enrollment` model
-- [ ] Create serializers for `Teacher` model
-- [ ] Create serializers for `TeachersPerCourse` model
-
-# Testing Serializers
-
-Testing serializers is crucial to ensure your Django project's API behaves correctly and handles data validation and conversion accurately. This section outlines the steps to test your serializers using pytest and Django's TestCase.
-
-## Testing Checklist
+## Testing Serializers
 
 Follow this checklist to thoroughly test your serializers:
 
@@ -143,34 +139,6 @@ Follow this checklist to thoroughly test your serializers:
 - [ ] **Test Serializer Nested Validations**:
   - If your serializer includes nested serializers, create tests to validate nested data and nested validations.
 
-
-### Views and Templates 
-
-- [x] Create views for `Assignment` model (List, Detail, Create, Update, Delete)
-- [x] Create views for `Submission` model (List, Detail, Create, Update, Delete)
-- [x] Create views for `Attendance` model (List, Detail, Create, Update, Delete)
-- [x] Create views for `Category` model (List, Detail, Create, Update, Delete)
-- [x] Create views for `Class` model (List, Detail, Create, Update, Delete)
-- [x] Create views for `Course` model (List, Detail, Create, Update, Delete)
-- [x] Create views for `CoursesPerCycle` model (List, Detail, Create, Update, Delete)
-- [ ] Create views for `Cycle` model (List, Detail, Create, Update, Delete)
-- [ ] Create views for `Role` model (List, Detail, Create, Update, Delete)
-- [ ] Create views for `BaseModel` model (List, Detail, Create, Update, Delete)
-- [ ] Create views for `Person` model (List, Detail, Create, Update, Delete)
-- [ ] Create views for `Test` model (List, Detail, Create, Update, Delete)
-- [ ] Create views for `TestScores` model (List, Detail, Create, Update, Delete)
-- [ ] Create views for `Student` model (List, Detail, Create, Update, Delete)
-- [ ] Create views for `Enrollment` model (List, Detail, Create, Update, Delete)
-- [ ] Create views for `Teacher` model (List, Detail, Create, Update, Delete)
-- [ ] Create views for `TeachersPerCourse` model (List, Detail, Create, Update, Delete)
-- [ ] Create views for displaying data in your application.
-- [ ] Design templates for rendering the data in a user-friendly way.
-
-### URLs and Routing 
-
-- [ ] Define URL patterns for your application's views.
-- [ ] Set up routing to connect URLs to views.
-
 ### README
 
 - [x] Update this README with a description of the project.
@@ -191,7 +159,6 @@ Follow these steps to set up your project:
 1. Ensure you have Python installed. You can download it from the official [Python website](https://www.python.org/downloads/).
 
 2. Install Django using pip:
-
 
 ### Pytest Installation
 

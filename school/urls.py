@@ -55,6 +55,12 @@ from .student.views import (
         EnrollmentListView,
         EnrollmentDetailView,
     )
+from .teacher.views import (
+        TeacherListView,
+        TeacherDetailView,
+        TeachersPerCourseListView,
+        TeachersPerCourseDetailView,
+    )
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -86,6 +92,10 @@ urlpatterns = [
     path('api/student/<int:pk>/', StudentDetailView.as_view(), name='student-detail'),
     path('api/enrollments/', EnrollmentListView.as_view(), name='enrollmenet-list'),
     path('api/enrollment/<int:pk>/', EnrollmentDetailView.as_view(), name='enrollment-detail'),
+    path('api/teachers/', TeacherListView.as_view(), name='teacher-list'),
+    path('api/teacher/<int:pk>/', TeacherDetailView.as_view(), name='teacher-detail'),
+    path('api/teacherspercourses/', TeachersPerCourseListView.as_view(), name='teacher-per-course-list'),
+    path('api/teacherspercourse/<int:pk>/', TeachersPerCourseDetailView.as_view(), name='teachers-per-course-detail'),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
