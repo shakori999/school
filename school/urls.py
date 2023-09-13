@@ -49,6 +49,12 @@ from .exames.views import (
         TestScoresListCreateView,
         TestScoresRetrieveUpdateDestroyView,
         )
+from .student.views import (
+        StudentListView,
+        StudentDetailView,
+        EnrollmentListView,
+        EnrollmentDetailView,
+    )
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -76,6 +82,10 @@ urlpatterns = [
     path('api/test/<int:pk>/', TestRetrieveUpdateDestroyView.as_view(), name='test-detail'),
     path('api/testscores/', TestScoresListCreateView.as_view(), name='testscore-list'),
     path('api/testscore/<int:pk>/', TestScoresRetrieveUpdateDestroyView.as_view(), name='testscore-detail'),
+    path('api/students/', StudentListView.as_view(), name='student-list'),
+    path('api/student/<int:pk>/', StudentDetailView.as_view(), name='student-detail'),
+    path('api/enrollments/', EnrollmentListView.as_view(), name='enrollmenet-list'),
+    path('api/enrollment/<int:pk>/', EnrollmentDetailView.as_view(), name='enrollment-detail'),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
