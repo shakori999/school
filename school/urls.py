@@ -37,6 +37,12 @@ from .cycle.views import (
         CycleListView,
         CycleDetailView,
     )
+from .dashboard.views import (
+        RoleListView,
+        RoleDetailView,
+        PeronsListView,
+        PeronsDetailView,
+    )
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -56,6 +62,10 @@ urlpatterns = [
     path('api/coursespercycle/<int:pk>/', CoursesPerCycleDetailView.as_view(), name='course-per-cycle-detail'),
     path('api/cycles/', CycleListView.as_view(), name='cycle-list'),
     path('api/cycle/<int:pk>/', CycleDetailView.as_view(), name='cycle-detail'),
+    path('api/roles/', RoleListView.as_view(), name='role-list'),
+    path('api/role/<int:pk>/', RoleDetailView.as_view(), name='role-detail'),
+    path('api/persons/', PeronsListView.as_view(), name='person-list'),
+    path('api/person/<int:pk>/', PeronsDetailView.as_view(), name='person-detail'),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
