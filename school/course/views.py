@@ -16,3 +16,4 @@ class CoursesPerCycleListView(generics.ListCreateAPIView):
 
 class CoursesPerCycleDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = CoursesPerCycle.objects.all()
+    serializer_class = CourseSerializer
