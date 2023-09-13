@@ -35,11 +35,8 @@ class CoursesPerCycle(models.Model):
                                    name='start_before_end')
         ]
 
-    def __str__(self):
-        return f"{self.course.name} ({self.cycle.cyclestartdate} - {self.cycle.cycleenddate})"
-
-    #def is_student_enrolled(self, student):
-    #    return self.students.filter(id=student.id).exists()
-
     #def remove_student(self, student):
     #    self.students.remove(student)
+
+    def __str__(self):
+        return f"{self.course.name} ({self.cycle.cyclestartdate} - {self.cycle.cycleenddate})"

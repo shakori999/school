@@ -39,6 +39,12 @@ from .classes.views import (
         ClassListView,
         ClassDetailView,
     )
+from .course.views import (
+        CourseListView,
+        CourseDetailView,
+        CoursesPerCycleListView,
+        CoursesPerCycleDetailView,
+    )
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -52,6 +58,10 @@ urlpatterns = [
     path('api/category/<int:pk>/', CategoryDetailView.as_view(), name='category-detail'),
     path('api/classes/', ClassListView.as_view(), name='class-list'),
     path('api/class/<int:pk>/', ClassDetailView.as_view(), name='class-detail'),
+    path('api/courses/', CourseListView.as_view(), name='course-list'),
+    path('api/course/<int:pk>/', CourseDetailView.as_view(), name='course-detail'),
+    path('api/coursespercycles/', CoursesPerCycleListView.as_view(), name='course-per-cycle-list'),
+    path('api/coursespercycle/<int:pk>/', CoursesPerCycleDetailView.as_view(), name='course-per-cycle-detail'),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
