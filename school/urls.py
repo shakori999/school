@@ -35,6 +35,10 @@ from .categories.views import (
         CategoryListCreateView,
         CategoryDetailView,
     )
+from .classes.views import (
+        ClassListView,
+        ClassDetailView,
+    )
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -46,6 +50,8 @@ urlpatterns = [
     path('api/attendance/<int:pk>/', AttendanceDetailView.as_view(), name='attendance-detail'),
     path('api/categories/', CategoryListCreateView.as_view(), name='category-list'),
     path('api/category/<int:pk>/', CategoryDetailView.as_view(), name='category-detail'),
+    path('api/classes/', ClassListView.as_view(), name='class-list'),
+    path('api/class/<int:pk>/', ClassDetailView.as_view(), name='class-detail'),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
