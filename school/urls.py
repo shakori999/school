@@ -43,6 +43,12 @@ from .dashboard.views import (
         PeronsListView,
         PeronsDetailView,
     )
+from .exames.views import (
+        TestListCreateView,
+        TestRetrieveUpdateDestroyView,
+        TestScoresListCreateView,
+        TestScoresRetrieveUpdateDestroyView,
+        )
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -66,6 +72,10 @@ urlpatterns = [
     path('api/role/<int:pk>/', RoleDetailView.as_view(), name='role-detail'),
     path('api/persons/', PeronsListView.as_view(), name='person-list'),
     path('api/person/<int:pk>/', PeronsDetailView.as_view(), name='person-detail'),
+    path('api/tests/', TestListCreateView.as_view(), name='test-list'),
+    path('api/test/<int:pk>/', TestRetrieveUpdateDestroyView.as_view(), name='test-detail'),
+    path('api/testscores/', TestScoresListCreateView.as_view(), name='testscore-list'),
+    path('api/testscore/<int:pk>/', TestScoresRetrieveUpdateDestroyView.as_view(), name='testscore-detail'),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
