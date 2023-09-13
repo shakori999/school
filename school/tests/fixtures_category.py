@@ -1,4 +1,5 @@
 import pytest
+import factory
 
 from ..categories.models import Category
 
@@ -10,3 +11,10 @@ def category():
     )
     return category
 
+
+class CategoryFactory(factory.django.DjangoModelFactory):
+    class Meta:
+        model = Category
+
+    name = factory.Faker('word')
+    categorydescription = factory.Faker('text')
