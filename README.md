@@ -85,10 +85,10 @@ Use this checklist to keep track of the components you've created and tested:
 - [x] Create serializers for `Assignment` model
 - [x] Create serializers for `Submission` model
 - [x] Create serializers for `Attendance` model
-- [ ] Create serializers for `Category` model
-- [ ] Create serializers for `Class` model
-- [ ] Create serializers for `Course` model
-- [ ] Create serializers for `CoursesPerCycle` model
+- [x] Create serializers for `Category` model
+- [x] Create serializers for `Class` model
+- [x] Create serializers for `Course` model
+- [x] Create serializers for `CoursesPerCycle` model
 - [ ] Create serializers for `Cycle` model
 - [ ] Create serializers for `Role` model
 - [ ] Create serializers for `Person` model
@@ -149,10 +149,10 @@ Follow this checklist to thoroughly test your serializers:
 - [x] Create views for `Assignment` model (List, Detail, Create, Update, Delete)
 - [x] Create views for `Submission` model (List, Detail, Create, Update, Delete)
 - [x] Create views for `Attendance` model (List, Detail, Create, Update, Delete)
-- [ ] Create views for `Category` model (List, Detail, Create, Update, Delete)
-- [ ] Create views for `Class` model (List, Detail, Create, Update, Delete)
-- [ ] Create views for `Course` model (List, Detail, Create, Update, Delete)
-- [ ] Create views for `CoursesPerCycle` model (List, Detail, Create, Update, Delete)
+- [x] Create views for `Category` model (List, Detail, Create, Update, Delete)
+- [x] Create views for `Class` model (List, Detail, Create, Update, Delete)
+- [x] Create views for `Course` model (List, Detail, Create, Update, Delete)
+- [x] Create views for `CoursesPerCycle` model (List, Detail, Create, Update, Delete)
 - [ ] Create views for `Cycle` model (List, Detail, Create, Update, Delete)
 - [ ] Create views for `Role` model (List, Detail, Create, Update, Delete)
 - [ ] Create views for `BaseModel` model (List, Detail, Create, Update, Delete)
