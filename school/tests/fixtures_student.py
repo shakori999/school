@@ -26,11 +26,12 @@ def person_student(user_student, create_student_role):
 
 
 @pytest.fixture
-def student(person_student, course_per_cycle):
+def student(course_per_cycle,person_student):
     student = Student.objects.create(
             user=person_student,
             studentname= "dsf",
             email = "dsf",
+            password="studentpass123",
             birthdate = "2000-01-01",
             phoneno = "123456",
             address = "street",

@@ -7,7 +7,7 @@ class StudentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Student
         fields = '__all__'
-        read_only_fields = ('created_at', 'updated_at')
+        read_only_fields = ('created_at', 'updated_at',"user")
 
     def validate_phoneno(self, value):
         # Custom validation logic for the 'phoneno' field
@@ -17,7 +17,7 @@ class StudentSerializer(serializers.ModelSerializer):
 
     def validate_email(self, value):
         # Custom validation logic for the 'email' field
-        if not value.endswith('@example.com'):
+        if not value.endswith('.com'):
             raise serializers.ValidationError("Email must be in the 'example.com' domain.")
         return value
 

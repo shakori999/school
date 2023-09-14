@@ -1,19 +1,20 @@
 import pytest
-from ..models import Teacher,TeachersPerCourse
+from ..models import Person, Teacher,TeachersPerCourse
 
 '''
 this section for testing teacher model
 '''
 
 @pytest.mark.django_db
-def test_teachers_relationship(teacher, person_teacher):
+def test_teachers_relationship(teacher):
     # Create a teacher instance
     teacher = teacher
     # Retrieve the created Teachers instance from the database
     tpc_from_db = Teacher.objects.get(id=teacher.id)
+    per_from_db = Person.objects.get(id=teacher.user.id)
 
     # Perform assertions to check the relationships
-    assert tpc_from_db.user == person_teacher 
+    assert tpc_from_db.user == per_from_db 
 
 
 """

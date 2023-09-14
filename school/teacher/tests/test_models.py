@@ -4,7 +4,7 @@ from ..models import TeachersPerCourse
 
 @pytest.mark.django_db
 def test_teacher_creation(teacher):
-    assert str(teacher) == f"{teacher.user.user.first_name} {teacher.user.user.last_name}"
+    assert str(teacher) == f"{teacher.user.user.username}"
 
 """
 this section for testing teacherpercourse model

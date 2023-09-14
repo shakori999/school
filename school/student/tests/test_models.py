@@ -2,7 +2,7 @@ import pytest
 from django.utils import timezone
 @pytest.mark.django_db
 def test_student_creation(student):
-    assert str(student) == f"{student.user.user.first_name} {student.user.user.last_name}"
+    assert str(student) == f"{student.user.user.username}"
 
 @pytest.mark.django_db
 def test_enrollment_creation(enrollment):

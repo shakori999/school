@@ -1,9 +1,10 @@
+from django.contrib.auth.models import User
 from django.db import models
 from django.core.exceptions import ValidationError
 from django.dispatch import receiver
 from django.db.models.signals import post_delete
 
-from ..dashboard.models import Person
+from ..dashboard.models import Person, Role
 
 def validate_phone_number(value):
     if not value.isdigit() or len(value) < 10 or len(value) > 15:
@@ -14,7 +15,7 @@ class Teacher(models.Model):
     user = models.OneToOneField(Person, on_delete=models.CASCADE)
     teachername = models.CharField(max_length=100)
     email = models.EmailField()
-    phoneno = models.CharField(max_length=20)
+    password = models.CharField(max_length=100, default="teacherpass123")  # Add the password field
     phoneno = models.CharField(max_length=20, validators=[validate_phone_number])
     subject_taught = models.CharField(max_length=50)
     date_of_birth = models.DateField()
@@ -24,17 +25,34 @@ class Teacher(models.Model):
         if self.date_of_birth is not None and (self.date_of_birth.year < 1900 or self.date_of_birth.year > 2023):
             raise ValidationError("Invalid date of birth")
 
-    def delete(self, *args, **kwargs):
-        # Call the User's delete method when deleting the Person
-        if self.user:
-            self.user.delete()
-        super(Teacher, self).delete(*args, **kwargs)
-
     def full_name(self):
         if self.user.user.first_name and self.user.user.last_name != "":
             return f"{self.user.user.first_name} {self.user.user.last_name}"
         else:
             return self.teachername
+
+    def save(self, *args, **kwargs):
+        # Create a Person instance
+        person = Person.objects.create(
+            username=self.teachername,  # Customize as needed
+            email=self.email,        # Customize as needed
+            password_hash=self.password,
+            role=Role.objects.get(role_name='teacher'),  # Customize role lookup
+        )
+
+        # Create a User instance
+        user = User.objects.create_user(
+            username=self.teachername,  # Customize as needed
+            password=self.password,  # Customize as needed
+            email=self.email,        # Customize as needed
+        )
+
+        # Link the User instance to the Person instance
+        person.user = user
+        person.save()
+        self.user = person
+
+        super(Teacher, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.full_name()
@@ -44,6 +62,7 @@ class Teacher(models.Model):
 
 @receiver(post_delete, sender=Teacher)
 def post_delete_user(sender, instance, *args, **kwargs):
+    if instance.user:
         instance.user.delete()
 
 class TeachersPerCourse(models.Model):

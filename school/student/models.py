@@ -1,10 +1,11 @@
+from django.contrib.auth.models import User
 from django.db import models
 from django.dispatch import receiver
 from django.db.models.signals import post_delete
 from django.core.exceptions import ValidationError
 from django.utils import timezone
 
-from ..dashboard.models import Person 
+from ..dashboard.models import Person, Role 
 
 
 # Create your models here.
@@ -14,16 +15,11 @@ class Student(models.Model):
     classes = models.ManyToManyField("classes.Class", through='attendance.Attendance')
     studentname = models.CharField(max_length=100)
     email = models.EmailField()
+    password = models.CharField(max_length=100, default="studentpass123")  # Add the password field
     birthdate = models.DateField()
     phoneno = models.CharField(max_length=20)
     address = models.TextField()
 
-
-    def delete(self, *args, **kwargs):
-        # Call the User's delete method when deleting the Person
-        if self.user:
-            self.user.delete()
-        super(Student, self).delete(*args, **kwargs)
 
     class Meta:
         indexes = [
@@ -36,12 +32,35 @@ class Student(models.Model):
             return f"{self.user.user.first_name} {self.user.user.last_name}"
         return self.user.user.username
 
+    def save(self, *args, **kwargs):
+        # Create a Person instance
+        person = Person.objects.create(
+            username=self.studentname,  # Customize as needed
+            email=self.email,        # Customize as needed
+            password_hash=self.password,
+            role=Role.objects.get(role_name='student'),  # Customize role lookup
+        )
+
+        # Create a User instance
+        user = User.objects.create_user(
+            username=self.studentname,  # Customize as needed
+            password=self.password,  # Customize as needed
+            email=self.email,        # Customize as needed
+        )
+
+        # Link the User instance to the Person instance
+        person.user = user
+        person.save()
+        self.user = person
+
+        super(Student, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.full_name()
 
 @receiver(post_delete, sender=Student)
 def post_delete_user(sender, instance, *args, **kwargs):
+    if instance.user:
         instance.user.delete()
 
 class Enrollment(models.Model):

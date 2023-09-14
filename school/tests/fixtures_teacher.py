@@ -12,29 +12,22 @@ from ..dashboard.models import Role, Person
 def create_teacher_role():
     role = Role.objects.create(role_name="teacher")
     return role
-    #yield role
-    #role.delete()
 
 @pytest.fixture
 def user_teacher():
     user_teacher = User.objects.create_user(username='teacher',first_name="ali2", last_name="mohammed2", password='testpass')
 
     return user_teacher
-    #yield user_teacher
-    #user_teacher.delete()
 
 @pytest.fixture
 def person_teacher(user_teacher, create_teacher_role):
     person = Person.objects.create(user=user_teacher,username=user_teacher.username, role=create_teacher_role)
 
     return person
-    #yield person
-    #person.delete()
 
 @pytest.fixture
 def teacher(person_teacher):
     teacher = Teacher.objects.create(
-            user=person_teacher,
             teachername="hussain rida",
             email="john@example.com",
             phoneno="1234567890",
@@ -43,12 +36,10 @@ def teacher(person_teacher):
             address="123 Main St",
     )
     return teacher
-    #yield teacher
-    #teacher.delete()
 
 @pytest.fixture
 def teacher_invalid_username(person_teacher):
-    teacher = Teacher.objects.create(
+    teacher = Teacher(
             user=person_teacher,
             teachername="",
             email="john@example.com",
@@ -58,8 +49,6 @@ def teacher_invalid_username(person_teacher):
             address="123 Main St",
             )
     return teacher
-    #yield teacher
-    #teacher.delete()
     
 @pytest.fixture
 def teacher_invalid_email(person_teacher):
@@ -73,8 +62,6 @@ def teacher_invalid_email(person_teacher):
             address="123 Main St",
     )
     return teacher
-    #yield teacher
-    #teacher.delete()
 
 @pytest.fixture
 def teacher_invalid_phoneno(person_teacher):
@@ -89,8 +76,6 @@ def teacher_invalid_phoneno(person_teacher):
     )
 
     return teacher
-    #yield teacher
-    #teacher.delete()
 
 @pytest.fixture
 def teacher_invalid_subject_taught(person_teacher):
@@ -105,9 +90,6 @@ def teacher_invalid_subject_taught(person_teacher):
     )
     return teacher
 
-    #yield teacher
-    #teacher.delete()
-
 @pytest.fixture
 def teacher_invalid_date_of_birth(person_teacher):
     teacher = Teacher.objects.create(
@@ -121,9 +103,7 @@ def teacher_invalid_date_of_birth(person_teacher):
     )
 
     return teacher
-    #yield teacher
-    #teacher.delete()
-#
+
 @pytest.fixture
 def teacher_invalid_address(person_teacher):
     teacher = Teacher.objects.create(
@@ -137,8 +117,6 @@ def teacher_invalid_address(person_teacher):
     )
 
     return teacher
-    #yield teacher
-    #teacher.delete()
 
 """
 this section for testing teacherpercourse model
@@ -152,8 +130,6 @@ def teachers_per_course(teacher, course_per_cycle, cycle):
         coursespercycle=course_per_cycle,
     )
     return tpc
-    #yield tpc
-    #tpc.delete()
 
 '''
 @pytest.fixture
