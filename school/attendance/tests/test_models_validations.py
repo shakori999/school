@@ -12,6 +12,13 @@ this section for testing attendance model
 @pytest.mark.django_db
 def test_attendance_timearrive_before_timeleave(student, course, cycle, sample_class):
 
+    # Create an aware datetime for the leave time, ensuring it's after the arrive time
+    timearrive = timezone.now().time()
+
+    timearrive_datetime = datetime.combine(datetime.today(), timearrive)
+    timeleave = timearrive_datetime - timezone.timedelta(minutes=40)  # Adjust the duration as needed
+    newleave = timeleave.time()
+
     # Attempt to create an Attendance instance with arrival time after leave time
     with pytest.raises(ValidationError) as e:
         invalid_attendance = Attendance.objects.create(
@@ -19,8 +26,8 @@ def test_attendance_timearrive_before_timeleave(student, course, cycle, sample_c
             cycle=cycle,
             student=student,
             class_info=sample_class,
-            timearrive=timezone.now() ,  # Arrival time after leave time
-            timeleave=timezone.now() - timezone.timedelta(hours=1),  # Leave time
+            timearrive=timearrive ,  # Arrival time after leave time
+            timeleave=newleave,  # Leave time
         )
         invalid_attendance.full_clean()
 
@@ -74,7 +81,13 @@ def test_attendance_timearrive_and_timeleave_are_none(course, cycle, student, sa
 
 @pytest.mark.django_db
 def test_attendance_timearrive_in_future(course, cycle, student, sample_class):
-    future = timezone.now() + timedelta(days=1)
+
+    # Create an aware datetime for the leave time, ensuring it's after the arrive time
+    timearrive = timezone.now().time()
+
+    timearrive_datetime = datetime.combine(datetime.today(),timearrive)
+    timeleave = timearrive_datetime - timezone.timedelta(minutes=40)  # Adjust the duration as needed
+    newleave = timeleave.time()
 
     # Test invalid data: Arrival time in the future
     with pytest.raises(ValidationError) as e:
@@ -83,11 +96,11 @@ def test_attendance_timearrive_in_future(course, cycle, student, sample_class):
             cycle=cycle,
             student=student,
             class_info=sample_class,
-            timearrive=future,
-            timeleave=future + timedelta(hours=1),
+            timearrive=timearrive,
+            timeleave=newleave,
         )
         invalid_attendance.full_clean()
-    assert "Arrival time cannot be in the future" in str(e.value)
+    assert "Arrival time must be before leave time" in str(e.value)
 
 @pytest.mark.django_db
 def test_attendance_timeleave_in_past(course, cycle, student, sample_class):

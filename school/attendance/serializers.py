@@ -4,10 +4,29 @@ from django.utils import timezone
 
 from .models import Attendance
 
+class CustomTimeField(serializers.Field):
+    def to_representation(self, value):
+        # Convert the Python datetime.time object to a string
+        return value.strftime('%H:%M:%S')
+
+    def to_internal_value(self, data):
+        # Parse the input string and return a datetime.time object
+        from datetime import time
+        try:
+            return time.fromisoformat(data)
+        except ValueError:
+            raise serializers.ValidationError("Invalid time format. Use ISO 8601 format (HH:MM:SS).")
+
 class AttendanceSerializer(serializers.ModelSerializer):
+
+    timearrive = CustomTimeField(default=timezone.now().time())
+    timeleave = CustomTimeField(default=timezone.now().time()) 
+
     class Meta:
         model = Attendance
-        fields = '__all__'  # Include all fields from the model
+        fields = ['course','cycle', 'student','class_info','timearrive','timeleave']
+
+        read_only_fields = ("timeleave", 'timearrive')
 
     def validate(self, data):
         """
@@ -16,16 +35,21 @@ class AttendanceSerializer(serializers.ModelSerializer):
         timearrive = data.get('timearrive')
         timeleave = data.get('timeleave')
 
-        if timearrive > timezone.now():
-            raise serializers.ValidationError("Arrival time cannot be in the future.")
-
         if timearrive > timeleave:
             raise serializers.ValidationError("Arrival time must be before leave time.")
         return data
 
     def create(self, validated_data):
+
         # Automatically set the timearrive field to the current time
-        validated_data['timearrive'] = timezone.now()
+        validated_data['timearrive'] = timezone.now().time()
+
+        class_info = validated_data.get('class_info')
+
+
+        # Automatically set the timeleave field based on class_date and class_endtime
+        validated_data['timeleave'] = class_info.endtime
+        
 
         # Create a new instance of the Attendance model with the updated data
         attendance = Attendance(**validated_data)

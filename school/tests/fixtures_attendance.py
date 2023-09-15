@@ -11,10 +11,10 @@ from rest_framework.test import APIClient
 def attendance(course, cycle, sample_class, student):
 
     # Create an aware datetime for the arrive time
-    timearrive = timezone.now()
+    timearrive = timezone.now().time()
 
     # Create an aware datetime for the leave time, ensuring it's after the arrive time
-    timeleave = timearrive + timezone.timedelta(minutes=40)  # Adjust the duration as needed
+    timeleave = timearrive   # Adjust the duration as needed
 
     attendance = Attendance.objects.create(
         course=course,
