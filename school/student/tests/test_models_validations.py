@@ -1,5 +1,6 @@
 import pytest
 from datetime import date
+from django.utils import timezone
 
 from django.core.exceptions import ValidationError
 
@@ -64,7 +65,7 @@ def test_cancellation_with_reason(course_per_cycle, student):
     enrollment = Enrollment(
         course_per_cycle=course_per_cycle,
         student=student,
-        enrollmentdate=date(2023, 9, 15),
+        enrollmentdate=timezone.now().date(),
         cancelled=True,
         cancellationreason="Not interested anymore",
     )
@@ -77,7 +78,7 @@ def test_cancellation_without_reason(course_per_cycle, student):
         enrollment = Enrollment(
             course_per_cycle=course_per_cycle,
             student=student,
-            enrollmentdate=date(2023, 9, 15),
+            enrollmentdate=timezone.now().date(),
             cancelled=True,
         )
         enrollment.full_clean()

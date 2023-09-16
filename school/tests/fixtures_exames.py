@@ -1,6 +1,8 @@
 import pytest
+from datetime import timedelta, datetime
 
-from datetime import timedelta,date
+from django.utils import timezone
+
 
 from ..exames.models import Test, TestsScores
 
@@ -30,11 +32,21 @@ def sample_testscore(course, cycle,student, sample_test):
     return testscore
 
 
+# Create an aware datetime for the leave time, ensuring it's after the arrive time
+time = timezone.now().time()
+date = timezone.now().date()
+# Combine time and date to create a datetime object
+datetime_obj = datetime.combine(date, time)
+
+# Convert the datetime object back to time and date
+converted_time = datetime_obj.time()
+converted_date = datetime_obj.date()
+
 @pytest.fixture
 def valid_test_data():
     return {
-        "testtime" : "10:23:02",
-        'testdate': '2023-09-15',  # Replace with a valid date string
+        "testtime": converted_time.strftime('%H:%M:%S'),
+        'testdate': converted_date.strftime('%Y-%m-%d'),
         "testno": 1,
         "agenda": "Valid agenda",
         # Add other required fields here

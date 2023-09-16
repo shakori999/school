@@ -2,6 +2,7 @@ pytest_plugins = [
         "school.tests.fixtures",
         "school.tests.fixtures_assignment",
         "school.tests.fixtures_attendance",
+        "school.tests.fixtures_bible_study",
         "school.tests.fixtures_category",
         "school.tests.fixtures_classes",
         "school.tests.fixtures_course",
