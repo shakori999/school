@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'school.classes',
     'school.attendance',
     'school.exames',
+    'school.bible_study',
 
     # third-party
     'rest_framework',

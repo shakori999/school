@@ -54,6 +54,8 @@ Use this checklist to keep track of the components you've created and tested:
   - [x] `Enrollment`
   - [x] `Teacher`
   - [x] `TeachersPerCourse`
+  - [ ] `Lesson`
+  - [ ] `LessonPDF`
   
 - [x] Define necessary fields and relationships for each model.
 - [x] Run migrations to create database tables.
