@@ -14,9 +14,9 @@ def validate_phone_number(value):
 class Teacher(models.Model):
     user = models.OneToOneField(Person, on_delete=models.CASCADE)
     teachername = models.CharField(max_length=100)
-    email = models.EmailField()
+    email = models.EmailField(unique=True)
     password = models.CharField(max_length=100, default="teacherpass123")  # Add the password field
-    phoneno = models.CharField(max_length=20, validators=[validate_phone_number])
+    phoneno = models.CharField(max_length=20, validators=[validate_phone_number],unique=True)
     subject_taught = models.CharField(max_length=50)
     date_of_birth = models.DateField()
     address = models.TextField()
