@@ -14,10 +14,10 @@ class Student(models.Model):
     courses_per_cycle = models.ManyToManyField("course.CoursesPerCycle", through='Enrollment')
     classes = models.ManyToManyField("classes.Class", through='attendance.Attendance')
     studentname = models.CharField(max_length=100)
-    email = models.EmailField()
+    email = models.EmailField(unique=True)
     password = models.CharField(max_length=100, default="studentpass123")  # Add the password field
     birthdate = models.DateField()
-    phoneno = models.CharField(max_length=20)
+    phoneno = models.CharField(max_length=20,unique=True)
     address = models.TextField()
 
 
