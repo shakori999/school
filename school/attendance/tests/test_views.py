@@ -23,7 +23,7 @@ def test_create_attendance(api_client, course,cycle,student,sample_class):
     hours, minutes, second = map(int, endtime_str.split(':'))
     
     # Create a datetime.time object
-    endtime = time(hours, minutes)
+    endtime = time(hours, minutes, second)
 
     # Convert timearrive to a string in "HH:MM:SS" format
     timearrive_str = timearrive.strftime('%H:%M:%S')
