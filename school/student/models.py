@@ -7,7 +7,6 @@ from django.utils import timezone
 
 from ..dashboard.models import Person, Role 
 
-
 # Create your models here.
 class Student(models.Model):
     user = models.OneToOneField(Person, on_delete=models.CASCADE)
@@ -26,6 +25,7 @@ class Student(models.Model):
             models.Index(fields=['phoneno']),
         ]
         verbose_name_plural = "Students"
+        ordering = ['phoneno']
 
     def full_name(self):
         if self.user.user.first_name and self.user.user.last_name:
