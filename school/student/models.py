@@ -19,7 +19,6 @@ class Student(models.Model):
     phoneno = models.CharField(max_length=20,unique=True)
     address = models.TextField()
 
-
     class Meta:
         indexes = [
             models.Index(fields=['phoneno']),
@@ -79,7 +78,6 @@ class Enrollment(models.Model):
 
         if self.enrollmentdate and self.enrollmentdate < timezone.now().date():
             raise ValidationError("Enrollment date cannot be in the past")
-
 
     def __str__(self):
         return f"{self.student.full_name()} - {self.course_per_cycle.course.name}"

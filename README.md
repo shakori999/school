@@ -96,8 +96,8 @@ Testing serializers is crucial to ensure your Django project's API behaves corre
 - [ ] Test model relationships. Completed only for: `person`, `Teacher`, `student`.
 - [ ] Test model methods and properties. Completed only for: `person`, `Teacher`.
 - [ ] Test model Index. Completed only for: `person`.
+- [ ] Test model Meta Options. `student`.
 - [ ] Test model signal.
-- [ ] Test model Meta Options.
 - [ ] Test model Model Manager.
 - [ ] Test model Integration.
 
