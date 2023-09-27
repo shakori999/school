@@ -10,6 +10,7 @@ from ..models import Course,CoursesPerCycle
 '''
 this section for testing coruse model
 '''
+
 @pytest.mark.django_db
 def test_course_code_max_length():
     # Test name exceeding max length
@@ -82,13 +83,12 @@ def test_course_get_full_description():
 this section for testing corusepercycle model
 '''
 @pytest.mark.django_db
-def test_coursespercyle_course_start_date_before_end_date():
+def test_coursespercyle_course_start_date_before_end_date(cycle, course):
     # Test invalid data: Course start date after end date
-    with pytest.raises(ValidationError) as e:
-        course = Course(code="COURSE101", name="Sample Course", description="A description.")
-        course.save()
-        coursespercycle = CoursesPerCycle(
+    with pytest.raises(IntegrityError) as e:
+        coursespercycle = CoursesPerCycle.objects.create(
             course=course,
+            cycle=cycle,
             coursestartdate=date(2023, 9, 1),
             courseenddate=date(2023, 8, 1),
         )

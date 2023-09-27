@@ -1,9 +1,12 @@
 from django.db import models
+from datetime import datetime
 
 
 from django.utils import timezone
 
 from django.core.exceptions import ValidationError
+
+current_time = timezone.localtime(timezone.now())
 
 # Create your models here.
 class Attendance(models.Model):
@@ -11,7 +14,7 @@ class Attendance(models.Model):
     cycle = models.ForeignKey("cycle.Cycle", on_delete=models.CASCADE)
     student = models.ForeignKey("student.Student", on_delete=models.CASCADE)
     class_info = models.ForeignKey("classes.Class", on_delete=models.CASCADE)
-    timearrive = models.TimeField(default=timezone.now().time())
+    timearrive = models.TimeField(default=current_time)
     timeleave = models.TimeField()
 
     class Meta:

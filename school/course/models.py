@@ -1,4 +1,4 @@
-from django.db import models
+from django.db import IntegrityError, models
 
 
 from ..dashboard.models import BaseModel
@@ -35,8 +35,15 @@ class CoursesPerCycle(models.Model):
                                    name='start_before_end')
         ]
 
+    def validate_time(self):
+        if self.courseenddate > self.courseenddate:
+            raise IntegrityError("start_before_end")
+
     #def remove_student(self, student):
     #    self.students.remove(student)
+    def save(self, *args, **kwargs):
+        self.validate_time()
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return f"{self.course.name} ({self.cycle.cyclestartdate} - {self.cycle.cycleenddate})"
