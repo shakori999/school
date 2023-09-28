@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-t(!qgk)7&=$wo*@t7k+dy5y9^1z3l*$n@(54v@-otppme7bbii
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*',]
 
 
 # Application definition
@@ -143,3 +143,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # URL for serving media files
 MEDIA_URL = '/media/'
+
+# Enable HTTPS redirect
+SECURE_SSL_REDIRECT = False
+
+# Use the 'X-Forwarded-Proto' header to detect HTTPS behind a proxy

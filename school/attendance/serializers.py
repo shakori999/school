@@ -1,6 +1,7 @@
 from rest_framework import serializers
 
 from django.utils import timezone
+from rest_framework.fields import TimeField
 
 from .models import Attendance
 
@@ -19,25 +20,11 @@ class CustomTimeField(serializers.Field):
 
 class AttendanceSerializer(serializers.ModelSerializer):
 
-    timearrive = CustomTimeField(default=timezone.now().time())
-    timeleave = CustomTimeField(default=timezone.now().time()) 
 
     class Meta:
         model = Attendance
         fields = ['course','cycle', 'student','class_info','timearrive','timeleave']
 
-        read_only_fields = ("timeleave", 'timearrive')
-
-    def validate(self, data):
-        """
-        Custom validation for the serializer data.
-        """
-        timearrive = data.get('timearrive')
-        timeleave = data.get('timeleave')
-
-        if timearrive > timeleave:
-            raise serializers.ValidationError("Arrival time must be before leave time.")
-        return data
 
     def create(self, validated_data):
 
@@ -45,6 +32,7 @@ class AttendanceSerializer(serializers.ModelSerializer):
         validated_data['timearrive'] = timezone.now().time()
 
         class_info = validated_data.get('class_info')
+        print(class_info.endtime)
 
 
         # Automatically set the timeleave field based on class_date and class_endtime
@@ -56,3 +44,17 @@ class AttendanceSerializer(serializers.ModelSerializer):
         attendance.save()
 
         return attendance
+
+    def validate(self, data):
+        """
+        Custom validation for the serializer data.
+        """
+        timearrive = data.get('timearrive')
+        timeleave = data.get('timeleave')
+        if timearrive is None or timeleave is None:
+            raise serializers.ValidationError("Both arrival and leave times must be provided.")
+
+        if timearrive >= timeleave:
+            raise serializers.ValidationError("Arrival time must be before leave time.")
+
+        return data
