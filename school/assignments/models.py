@@ -11,7 +11,9 @@ class Assignment(BaseModel):
     course = models.ForeignKey("course.Course", on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
     description = models.TextField()
-    due_date = models.DateField(validators=[MinValueValidator(limit_value=timezone.now().date())])
+    due_date = models.DateField(
+            validators=[MinValueValidator(limit_value=timezone.now().date())]
+        )
     description2 = models.TextField()
 
     def perform_action(self):

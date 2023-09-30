@@ -16,14 +16,20 @@ class AssignmentSerializer(serializers.ModelSerializer):
         return value
 
 class SubmissionSerializer(serializers.ModelSerializer):
+
+    assignment = serializers.CharField()
+    student = serializers.CharField()
+
     class Meta:
         model = Submission
         fields = ('id', 'assignment', 'student', 'submission_date', 'file_upload')
 
     def validate_submission_date(self, value):
         # Ensure submission_date is not in the future
-        if value > timezone.now():
+        if value > timezone.now().date():
             raise serializers.ValidationError("Submission date cannot be in the future.")
+        if value < timezone.now().date():
+            raise serializers.ValidationError("Submission date cannot be in the past.")
         return value
 
     def validate_file_upload(self, value):
